@@ -29,7 +29,19 @@ STATUS: Environment is ready and verified for 4-bit QLoRA fine-tuning.
   MODEL QUANTIZATION 4-BIT LOAD TEST
 ============================================================
 Model ID: Qwen/Qwen2.5-1.5B-Instruct
-Load Time: 236.35 s
+Load Time: 9.79 s
+VRAM Allocated: 1.07 GB
+Peak VRAM: 1.10 GB
+Inference Peak VRAM: 1.10 GB
+Criterion (Peak < 3.5 GB): PASSED (1.10 GB < 3.5 GB)
+Sample Output: Ya, saya masih aktif dan siap membantu Anda dengan klaim asuransi yang mungkin Anda miliki. Bagaimana jika ada
+============================================================
+
+============================================================
+  MODEL QUANTIZATION 4-BIT LOAD TEST
+============================================================
+Model ID: Qwen/Qwen2.5-1.5B-Instruct
+Load Time: 17.95 s
 VRAM Allocated: 1.07 GB
 Peak VRAM: 1.10 GB
 Inference Peak VRAM: 1.10 GB

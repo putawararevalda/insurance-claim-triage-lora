@@ -279,8 +279,8 @@ def eval_smoke():
             
         f.write("## 3. Kesimpulan Evaluasi MVP\n\n")
         f.write("1. **Kepatuhan Format JSON**: Fine-tuned LoRA model mencapai tingkat keberhasilan **100% validitas skema Pydantic**, mengeliminasi halusinasi teks pembuka/penutup yang sering muncul pada Base Model.\n")
-        f.write("2. **Ketepatan Klasifikasi Domain**: LoRA adapter berhasil menyerap terminologi spesifik asuransi kesehatan Indonesia (kategori klaim dan metode cashless vs reimbursement) dengan peningkatan akurasi signifikan (+50.0%).\n")
-        f.write("3. **Efisiensi Inferensi**: Waktu inferensi stabil dan responsif di GPU lokal NVIDIA RTX 3050 (rata-rata 5.8 detik vs 12.7 detik pada Base Model) tanpa kendala VRAM.\n")
+        f.write(f"2. **Ketepatan Klasifikasi Domain**: LoRA adapter berhasil menyerap terminologi spesifik asuransi kesehatan Indonesia (kategori klaim dan metode cashless vs reimbursement) dengan peningkatan akurasi signifikan (+{lora_cat_pct - base_cat_pct:.1f}%).\n")
+        f.write(f"3. **Efisiensi Inferensi**: Waktu inferensi stabil dan responsif di GPU lokal NVIDIA RTX 3050 (rata-rata {lora_avg_lat/1000:.1f} detik vs {base_avg_lat/1000:.1f} detik pada Base Model) tanpa kendala VRAM.\n")
         
     print(f"\nMarkdown report written to {REPORT_PATH}", flush=True)
     print("=" * 65, flush=True)

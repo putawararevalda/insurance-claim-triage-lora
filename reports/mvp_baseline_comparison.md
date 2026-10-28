@@ -1,6 +1,6 @@
 # MVP Evaluation Report: Base Model vs LoRA Fine-Tuned Model
 
-**Date**: 2026-10-28 16:04:35  
+**Date**: 2026-10-28 16:19:36  
 **Base Model**: `Qwen/Qwen2.5-1.5B-Instruct` (4-bit NF4)  
 **Adapter**: `models/lora_adapter_mvp` (Rank 16, Alpha 32, 3 Epochs)  
 **Test Set**: `data/seed_test.jsonl` (18 unseen samples)  
@@ -11,7 +11,7 @@
 |---|:---:|:---:|:---:|
 | **Pydantic JSON Validity** | 94.4% (17/18) | **100.0%** (18/18) | **+5.6%** |
 | **Category Accuracy** | 44.4% (8/18) | **77.8%** (14/18) | **+33.3%** |
-| **Mean Latency per Request** | 10305.6 ms | 5845.1 ms | -4460.6 ms |
+| **Mean Latency per Request** | 10305.6 ms | 5676.2 ms | -4629.4 ms |
 
 ## 2. Sample-by-Sample Side-by-Side Comparison
 
@@ -22,7 +22,7 @@
 
 - **Ground Truth**: Category: `Critical_Illness`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `9375.4 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `6046.8 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `3974.3 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -53,7 +53,7 @@
 
 - **Ground Truth**: Category: `Personal_Accident`, Urgency: `Low`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `7051.7 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `5132.1 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `4889.6 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -84,7 +84,7 @@
 
 - **Ground Truth**: Category: `Personal_Accident`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `7075.8 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `6229.7 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `6148.9 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -115,7 +115,7 @@
 
 - **Ground Truth**: Category: `Inpatient_Medical`, Urgency: `Medium`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `14286.2 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5439.3 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5417.0 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -153,7 +153,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Inquiry_or_Dispute`, Urgency: `Medium`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `7498.0 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `5410.9 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `5408.2 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -184,7 +184,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Outpatient_Emergency`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `7636.4 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `5263.4 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `5263.5 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -215,7 +215,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Inquiry_or_Dispute`, Urgency: `Low`
 - **Base Model**: Valid JSON = `False`, Predicted Category = `INVALID_JSON`, Latency = `13239.2 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `6502.6 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `6415.3 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -249,7 +249,7 @@ Berikut adalah langkah-langkah yang bisa dilakukan:
 
 - **Ground Truth**: Category: `Critical_Illness`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `13255.9 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `5701.1 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `5672.7 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -285,7 +285,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Personal_Accident`, Urgency: `Low`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `13203.2 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `5448.5 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Personal_Accident`, Latency = `5435.9 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -324,7 +324,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Outpatient_Emergency`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `13215.0 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5178.1 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5138.2 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -360,7 +360,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Critical_Illness`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `6779.8 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `6961.6 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `6906.4 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -391,7 +391,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Inquiry_or_Dispute`, Urgency: `Low`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `5699.5 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `6197.3 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `6030.1 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -422,7 +422,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Inpatient_Medical`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `8385.3 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5973.0 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5717.2 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -453,7 +453,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Inquiry_or_Dispute`, Urgency: `Low`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `12631.0 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `7234.6 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inquiry_or_Dispute`, Latency = `7293.3 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -490,7 +490,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Outpatient_Emergency`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `13241.1 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `5913.1 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `5906.5 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -527,7 +527,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Critical_Illness`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `13284.0 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `6081.3 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Critical_Illness`, Latency = `6074.8 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -565,7 +565,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Inpatient_Medical`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `13185.2 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5191.2 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5214.7 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -603,7 +603,7 @@ Penjelasan:
 
 - **Ground Truth**: Category: `Outpatient_Emergency`, Urgency: `High`
 - **Base Model**: Valid JSON = `True`, Predicted Category = `Outpatient_Emergency`, Latency = `6458.4 ms`
-- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5306.5 ms`
+- **LoRA Model**: Valid JSON = `True`, Predicted Category = `Inpatient_Medical`, Latency = `5264.9 ms`
 
 #### Perbandingan Respon Mentah
 
@@ -630,5 +630,5 @@ Penjelasan:
 ## 3. Kesimpulan Evaluasi MVP
 
 1. **Kepatuhan Format JSON**: Fine-tuned LoRA model mencapai tingkat keberhasilan **100% validitas skema Pydantic**, mengeliminasi halusinasi teks pembuka/penutup yang sering muncul pada Base Model.
-2. **Ketepatan Klasifikasi Domain**: LoRA adapter berhasil menyerap terminologi spesifik asuransi kesehatan Indonesia (kategori klaim dan metode cashless vs reimbursement) dengan peningkatan akurasi signifikan (+50.0%).
-3. **Efisiensi Inferensi**: Waktu inferensi stabil dan responsif di GPU lokal NVIDIA RTX 3050 (rata-rata 5.8 detik vs 12.7 detik pada Base Model) tanpa kendala VRAM.
+2. **Ketepatan Klasifikasi Domain**: LoRA adapter berhasil menyerap terminologi spesifik asuransi kesehatan Indonesia (kategori klaim dan metode cashless vs reimbursement) dengan peningkatan akurasi signifikan (+33.3%).
+3. **Efisiensi Inferensi**: Waktu inferensi stabil dan responsif di GPU lokal NVIDIA RTX 3050 (rata-rata 5.7 detik vs 10.3 detik pada Base Model) tanpa kendala VRAM.
