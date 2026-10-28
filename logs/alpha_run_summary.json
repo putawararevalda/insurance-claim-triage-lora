@@ -1,0 +1,9 @@
+{
+  "total_steps": 6,
+  "total_epochs": 2.0,
+  "train_duration_sec": 156.68,
+  "train_duration_min": 2.61,
+  "peak_vram_gb": 2.577,
+  "best_metric": 2.8290939331054688,
+  "best_model_checkpoint": "checkpoints/alpha\\checkpoint-6"
+}

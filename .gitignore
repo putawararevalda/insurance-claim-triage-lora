@@ -39,6 +39,7 @@ checkpoints/
 wandb/
 .cache/
 mlruns/
+*.db
 
 # IDE & OS
 .vscode/
