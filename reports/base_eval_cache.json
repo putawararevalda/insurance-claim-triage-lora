@@ -1,0 +1,74 @@
+[
+  {
+    "raw_output": "```json\n{\n  \"category\": \"ALS\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"ALS\",\n  \"claim_method\": \"Polis\",\n  \"reasoning\": \"Nasabah terdiagnosa dengan ALS, kondisi ini memerlukan perawatan medis intensif dan potensi penyebaran ke seluruh tubuh. Polis harus diperiksa untuk melaporkan klaim.\"\n}\n```",
+    "latency_ms": 9375.355958938599
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Medical\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Accident-related injuries\",\n  \"claim_method\": \"Rental insurance\",\n  \"reasoning\": \"The patient suffered an accident involving a car hit from behind while crossing the zebra crossing and received medical treatment for injuries including a broken jaw and facial fractures.\"\n}\n```",
+    "latency_ms": 7051.67818069458
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Fracture Pelvis\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The patient has sustained a severe injury from falling from a height and is currently in critical condition requiring immediate medical attention.\"\n}\n```",
+    "latency_ms": 7075.795412063599
+  },
+  {
+    "raw_output": "Berikut adalah analisis klaim dari laporan tersebut:\n\n```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Colitis Renal\",\n  \"claim_method\": \"Cashless\",\n  \"reasoning\": \"The patient is currently hospitalized at RS Mayapada for observation due to colitis renal caused by ureterolithiasis and has been recommended a URS procedure with inpatient stay of 2 days using cashless payment method.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Health - Klaim ini berkaitan dengan kondisi kesehatan.\n2. **Urgency**: High - Pasien memerlukan perawatan segera karena kondisi kritis seperti colitis renal.\n3. **Primary Condition**: Colitis Renal - Kondisi utama yang",
+    "latency_ms": 14286.19909286499
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Incorrect Calculation in Kuitansi\",\n  \"claim_method\": \"Manual Review and Correction\",\n  \"reasoning\": \"The calculation for the room fee is incorrect according to the provided kuitansi. The actual cost should be Rp 1,000,000 while it has been reduced to Rp 600,000.\"\n}\n```",
+    "latency_ms": 7497.968673706055
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Gastrointestinal\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Percutaneous Hemorrhage\",\n  \"claim_method\": \"Cashless\",\n  \"reasoning\": \"The patient experienced a massive gum bleed after the removal of the second molar without stopping for 6 hours. They have been sent to the Emergency Department at the Dental Clinic and Hospital for tampon hemostatic treatment. The insurance is cashless.\"\n}\n```",
+    "latency_ms": 7636.399507522583
+  },
+  {
+    "raw_output": "Untuk melakukan triage dan analisis klaim seperti ini, kita perlu mempertimbangkan beberapa faktor utama:\n\n1. **Faktor Fisik**: Apakah ada gejala fisik yang dapat menunjukkan bahwa pasien telah mengalami stroke?\n2. **Faktor Klinis**: Apakah ada penilaian medis yang menunjukkan bahwa pasien memiliki stroke?\n3. **Faktor Komunikatif**: Apakah ada informasi tentang penggunaan fisioterapi rehabilitation?\n\nBerikut adalah langkah-langkah yang bisa dilakukan:\n\n### Langkah 1: Analisis Klaim\n\n#### Step 1: Identifikasi Faktor Fisik\n- **Gejala Fisik**: Jika pasien memiliki gejala fisik seperti kehilangan kesopanan, kelumpukan otot",
+    "latency_ms": 13239.168643951416
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Medical\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Burns\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The patient has suffered a critical burn injury from an explosion involving liquefied petroleum gas at the Cipto Mangunkusumo Hospital. The burn is classified as major and covers 35% of the body surface area. The patient requires in-patient care for treatment.\"\n}\n```\n\nPenjelasan:\n- **Category**: Medical - Mengindikasikan bahwa klaim ini berkaitan dengan kondisi medis.\n- **Urgency**: High - Klaim ini memerlukan perhatian cepat karena kegagalan dalam pengelolaan gas yang menyebabkan luka bakar yang signifikan.\n- **",
+    "latency_ms": 13255.854845046997
+  },
+  {
+    "raw_output": "Berikut adalah analisis klaim tersebut menggunakan skema ClaimTriageOutput:\n\n```json\n{\n    \"category\": \"accident\",\n    \"urgency\": \"high\",\n    \"primary_condition\": \"accidental_injury\",\n    \"claim_method\": \"in_person\",\n    \"reasoning\": \"The patient claims to have been injured by a venomous fish while fishing at Pantai Anyer and requires medical treatment in the emergency room.\"\n}\n```\n\nPenjelasan:\n- **Category**: \"accident\" - Klaim ini melibatkan kecelakaan.\n- **Urgency**: \"high\" - Kebutuhan medis sangat mendesak karena terdapat luka dari kecelakaan.\n- **Primary Condition**: \"accidental_injury\" - Luka akibat kecelakaan.\n- **Claim Method**: \"in",
+    "latency_ms": 13203.167915344238
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Sick Headache with Vomiting and Dehydration\",\n  \"claim_method\": \"Cashless Payment for Observation and Antiemetic Infusion\",\n  \"reasoning\": \"The patient is experiencing severe symptoms such as a spinning headache, vomiting, and dehydration, which require immediate medical attention. The use of cashless payment method indicates the need for quick access to healthcare services.\"\n}\n```\n\nPenjelasan:\n- **Category**: Health - Menggambarkan bahwa klaim ini berkaitan dengan kesehatan.\n- **Urgency**: High - Menunjukkan bahwa kondisi ini memerlukan perhatian cepat karena gejalanya sangat serius.\n- **Primary Condition**: Sickness Headache with Vomiting and Dehydration",
+    "latency_ms": 13215.047121047974
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Aneurysm repair with vascular graft placement\",\n  \"claim_method\": \"Hospital Admission and Surgery\",\n  \"reasoning\": \"The patient underwent a major surgical procedure for an aneurysm repair involving the placement of a vascular graft, which is considered a high-risk medical event requiring immediate attention.\"\n}\n```",
+    "latency_ms": 6779.808044433594
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Non-Formulary Medication\",\n  \"claim_method\": \"Regular Claim Method\",\n  \"reasoning\": \"The prescription for the herbal and vitamin supplements was not covered by the insurance due to it being considered a non-formulary medication.\"\n}\n```",
+    "latency_ms": 5699.479818344116
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Medical\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Pregnancy Complication - Prolonged Labor or Delivery\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The patient is experiencing severe labor contractions and vaginal bleeding at 32 weeks gestation, which requires immediate medical attention due to the potential for complications such as prolonged labor or delivery. The condition meets the criteria for a high-urgency case in pregnancy-related issues.\"\n}\n```",
+    "latency_ms": 8385.288000106812
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Syarat Klaim Santunan Tunai Harian (Hospital Cash Plan)\",\n  \"claim_method\": \"Manual Review\",\n  \"reasoning\": \"The patient is seeking information on the requirements for claiming a hospital cash plan benefit. The current method involves submitting a scanned copy of their medical records rather than an original receipt from the cashier.\"\n}\n```\n\n**Category:** Claim  \n**Urgency:** High  \n**Primary Condition:** Syarat Klaim Santunan Tunai Harian (Hospital Cash Plan)  \n**Claim Method:** Manual Review  \n**Reasoning:** The patient needs to clarify if they should submit a scanned copy of their medical records or an original receipt from the cashier in order to claim the hospital cash plan benefit.",
+    "latency_ms": 12630.996465682983
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Injury from foreign object\",\n  \"claim_method\": \"Cashless\",\n  \"reasoning\": \"The patient is seeking treatment for an injury caused by a foreign object in their ear and has already been admitted to the hospital with a scheduled appointment for an emergency extraction procedure. The patient wishes to proceed without using insurance.\"\n}\n```\n\nPenjelasan:\n- **Category**: Health - Menggambarkan bahwa klaim ini berkaitan dengan kesehatan.\n- **Urgency**: High - Klaim ini memerlukan perhatian cepat karena ada masalah medis yang signifikan.\n- **Primary Condition**: Injury from foreign object - Menunjukkan kondisi medis utama yang dialami oleh pasien.\n- **Claim",
+    "latency_ms": 13241.11032485962
+  },
+  {
+    "raw_output": "Berikut adalah analisis klaim asuransi untuk pasien Bpk. Gunawan berdasarkan laporan yang diberikan:\n\n```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"cancer\",\n  \"claim_method\": \"inpatient\",\n  \"reasoning\": \"The patient has been diagnosed with Stage IV prostate cancer with metastasis to the spine based on a bone scan and elevated PSA level greater than 100 ng/mL. The critical documents are attached.\"\n}\n```\n\nPenjelasan:\n- **Category**: \"medical\" - Klaim ini berkaitan dengan kondisi medis.\n- **Urgency**: \"high\" - Pasien memerlukan perawatan segera karena diagnosis kanker prostat stadium IV dan metastasi ke tulang panggul.\n-",
+    "latency_ms": 13284.04426574707
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"health\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"intussusception\",\n  \"claim_method\": \"cashless\",\n  \"reasoning\": \"The patient is experiencing symptoms that require immediate medical attention and observation before further action can be taken.\"\n}\n```\n\nPenjelasan:\n- **Category**: health - Klaim ini berkaitan dengan kesehatan.\n- **Urgency**: high - Penyakit intususesis memerlukan perhatian cepat dan perawatan intensif.\n- **Primary Condition**: intussusception - Gejala utama yang ditemui oleh pasien.\n- **Claim Method**: cashless - Metode pembayaran yang digunakan untuk klaim ini.\n- **Reasoning**: Pasien membutuhkan perawatan intensif",
+    "latency_ms": 13185.20212173462
+  },
+  {
+    "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Burns\",\n  \"claim_method\": \"In-Person Visit\",\n  \"reasoning\": \"The patient is experiencing severe pain and inflammation in the burn area, requiring immediate medical attention. The use of a cashless card for this type of visit may be restricted due to safety concerns.\"\n}\n```",
+    "latency_ms": 6458.446025848389
+  }
+]

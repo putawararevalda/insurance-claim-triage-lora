@@ -1,0 +1,38 @@
+============================================================
+  CUDA & HARDWARE ENVIRONMENT VERIFICATION
+============================================================
+Python Version: 3.12.14 (E:\portfolios\lorafinetuning\.venv\Scripts\python.exe)
+Platform: win32
+PyTorch Version: 2.6.0+cu124
+CUDA Available: True
+Device Count: 1
+Current Device Index: 0
+Device Name: NVIDIA GeForce RTX 3050 6GB Laptop GPU
+Compute Capability: 8.6
+Total VRAM: 6.00 GB (6,441,992,192 bytes)
+Sample Tensor Allocation: Success (3.81 MB allocated, 20.00 MB reserved)
+------------------------------------------------------------
+  KEY DEPENDENCIES
+------------------------------------------------------------
+  transformers   : 5.21.0
+  peft           : 0.21.2
+  trl            : 1.16.0
+  bitsandbytes   : 0.50.2
+  accelerate     : 1.15.0
+  datasets       : 5.1.0
+  pydantic       : 2.14.1
+============================================================
+STATUS: Environment is ready and verified for 4-bit QLoRA fine-tuning.
+============================================================
+
+============================================================
+  MODEL QUANTIZATION 4-BIT LOAD TEST
+============================================================
+Model ID: Qwen/Qwen2.5-1.5B-Instruct
+Load Time: 236.35 s
+VRAM Allocated: 1.07 GB
+Peak VRAM: 1.10 GB
+Inference Peak VRAM: 1.10 GB
+Criterion (Peak < 3.5 GB): PASSED (1.10 GB < 3.5 GB)
+Sample Output: Ya, saya masih aktif dan siap membantu Anda dengan klaim asuransi yang mungkin Anda miliki. Bagaimana jika ada
+============================================================

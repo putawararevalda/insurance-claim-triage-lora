@@ -1,0 +1,15 @@
+{
+  "project_id": "556a020d-ba5c-4c78-ac70-df9591dbe1bb",
+  "project_title": "LoRA Fine-Tuning",
+  "resources": [
+    {
+      "id": "6d8573ff-7075-44e4-bd95-d39a1b4ff701",
+      "resource_type": "local_directory",
+      "resource_ref": {
+        "daemon_id": "01a0e333-20a3-710a-b9af-1ee9280ebdc7",
+        "local_path": "E:\\portfolios\\lorafinetuning"
+      },
+      "label": "lorafinetuning"
+    }
+  ]
+}
