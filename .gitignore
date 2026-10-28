@@ -50,3 +50,9 @@ Thumbs.db
 *.tmp
 temp/
 reply.md
+
+# Multica runtime files
+.agents/
+.multica/
+AGENTS.md
+
