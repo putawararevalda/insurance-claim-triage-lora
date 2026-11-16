@@ -1,0 +1,19 @@
+{
+  "total_steps": 35,
+  "total_epochs": 0.2692307692307692,
+  "train_duration_sec": 426.97,
+  "train_duration_min": 7.12,
+  "peak_vram_gb": 2.646,
+  "best_metric": 1.6247278451919556,
+  "best_model_checkpoint": "checkpoints\\sweep\\alpha_sweep_r32_a64_lr1e4_attn\\checkpoint-35",
+  "run_name": "alpha_sweep_r32_a64_lr1e4_attn",
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "lr": 0.0001,
+  "target_modules": "attention",
+  "epochs": 2,
+  "batch_size": 2,
+  "grad_accum": 2,
+  "output_dir": "models\\sweep\\alpha_sweep_r32_a64_lr1e4_attn",
+  "total_train_duration_sec": 427.25
+}

@@ -1,9 +1,19 @@
 {
-  "total_steps": 6,
+  "total_steps": 130,
   "total_epochs": 2.0,
-  "train_duration_sec": 156.68,
-  "train_duration_min": 2.61,
-  "peak_vram_gb": 2.577,
-  "best_metric": 2.8290939331054688,
-  "best_model_checkpoint": "checkpoints/alpha\\checkpoint-6"
+  "train_duration_sec": 998.65,
+  "train_duration_min": 16.64,
+  "peak_vram_gb": 3.13,
+  "best_metric": 0.5257066488265991,
+  "best_model_checkpoint": "checkpoints/alpha\\checkpoint-125",
+  "run_name": "alpha-qlora-r16-a32_20261029_080603",
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lr": 0.0002,
+  "target_modules": "all-linear",
+  "epochs": 2,
+  "batch_size": 4,
+  "grad_accum": 2,
+  "output_dir": "models/lora_adapter_alpha_best",
+  "total_train_duration_sec": 998.93
 }
