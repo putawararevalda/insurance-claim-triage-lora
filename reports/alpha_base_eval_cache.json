@@ -1,0 +1,366 @@
+{
+  "domain_results": [
+    {
+      "raw_output": "```json\n{\n  \"category\": \"stroke\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"hemiparesis\",\n  \"claim_method\": \"terapia trombolisis\",\n  \"reasoning\": \"Pasien mengalami afasia bicara paling parah dan hemiparesis dextra mendadak, memerlukan terapi trombolisis dan rawat ICU. Klaim ini sebaiknya diselesaikan secara cepat karena efek sampingan dari terapi trombolisis dapat menimbulkan masalah kesehatan lain.\"\n}\n```",
+      "latency_ms": 7399.285899999086
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"respiratory distress\",\n  \"claim_method\": \"emergency\",\n  \"reasoning\": \"The patient is experiencing severe respiratory distress due to an allergic reaction that requires immediate medical attention.\"\n}\n```",
+      "latency_ms": 3330.359000014141
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Febrile convulsion in a child\",\n  \"claim_method\": \"Emergency visit to the hospital\",\n  \"reasoning\": \"The patient's temperature is high and they are experiencing a febrile seizure, which requires immediate medical attention.\"\n}\n```",
+      "latency_ms": 3900.652699987404
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"head injury and leg fracture\",\n  \"claim_method\": \"in-person visit to hospital\",\n  \"reasoning\": \"The patient suffered a head injury and a leg fracture after being involved in an accident where they fell from the roof of their home by falling off a building. The incident resulted in significant injuries requiring emergency medical attention.\"\n}\n```",
+      "latency_ms": 4726.413099997444
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Dengue Infection\",\n  \"claim_method\": \"Inpatient Admission\",\n  \"reasoning\": \"The patient is currently hospitalized at RS Mitra Keluarga Kelapa Gading due to a severe case of dengue fever with thrombocytopenia (trombosis count of 45,000). The condition requires immediate attention and treatment.\"\n}\n```",
+      "latency_ms": 5272.861000004923
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Gastric Ulcer\",\n  \"claim_method\": \"Manual Submission\",\n  \"reasoning\": \"The patient is experiencing a condition that requires immediate medical attention and treatment.\"\n}\n```",
+      "latency_ms": 3243.6785000027157
+    },
+    {
+      "raw_output": "Berikut adalah analisis klaim asuransi berdasarkan laporan tersebut:\n\n```json\n{\n  \"category\": \"stroke\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"stroke\",\n  \"claim_method\": \"hospitalization\",\n  \"reasoning\": \"The patient is experiencing a severe medical condition requiring hospitalization and immediate attention.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Stroke - Dikategorikan sebagai stroke karena kondisi medis yang ditangani.\n2. **Urgency**: High - Kondisi ini memerlukan perhatian cepat dan urgentitas tinggi.\n3. **Primary Condition**: Stroke - Ini adalah kondisi utama yang harus diperhatikan.\n4. **Claim Method**: Hospitalization - Klaim dilaporkan melalui pengaduan kepolisian dan",
+      "latency_ms": 8970.574099977966
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Hernia Surgery\",\n  \"claim_method\": \"Cashless Payment\",\n  \"reasoning\": \"The patient is scheduled for a hernia surgery and will be admitted to the hospital for 7 days. The cashless payment method has been approved.\"\n}\n```",
+      "latency_ms": 4030.03439999884
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"ClaimTriaging\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Double Claim\",\n  \"claim_method\": \"BPJS Kesehatan\",\n  \"reasoning\": \"Surgeon's note indicates that the same hospital bill was submitted to both insurance companies for the same medical procedure. This suggests a potential double claim.\"\n}\n```",
+      "latency_ms": 3975.418299989542
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"burns\",\n  \"claim_method\": \"cashless\",\n  \"reasoning\": \"The patient has suffered burns on their upper extremities and requires immediate medical attention for bed rest and plastic surgery. The procedure is covered under the policy with a unique reference number.\"\n}\n```",
+      "latency_ms": 4114.085000008345
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"cardiovascular disease\",\n  \"claim_method\": \"in-person visit to hospital\",\n  \"reasoning\": \"The patient has a high risk of cardiovascular events due to the bypass surgery and requires immediate medical attention.\"\n}\n```",
+      "latency_ms": 3511.355499998899
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Cancer\",\n  \"claim_method\": \"In-Patient Treatment\",\n  \"reasoning\": \"The patient has been diagnosed with cancer and is scheduled for mastectomy and chemotherapy. This condition requires immediate attention due to the severity of the diagnosis.\"\n}\n```",
+      "latency_ms": 3781.7631000070833
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"burns\",\n  \"claim_method\": \"cashless\",\n  \"reasoning\": \"The patient suffered severe burns from an electrical shock and requires immediate medical attention in the intensive care unit (ICU). The use of cashless payment method is crucial for emergency situations.\"\n}\n```\n\nPenjelasan:\n1. **Category**: \"accident\" - Mengindikasikan bahwa ini adalah kegagalan elektris.\n2. **Urgency**: \"high\" - Menunjukkan bahwa perawatan diperlukan segera karena luka bakar yang parah.\n3. **Primary Condition**: \"burns\" - Luka bakar merupakan kondisi utama yang harus ditangani.\n4. **Claim Method**:",
+      "latency_ms": 8879.157399991527
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Excess Charge on Cashless Tagihan\",\n  \"claim_method\": \"Email with Polis Number\",\n  \"reasoning\": \"The customer is requesting a detailed calculation of the insurance coverage to resolve an issue regarding an excess charge on their cashless bill from RS Grha Kedoya. A formal request for a detailed calculation should be sent via email using the provided policy number.\"\n}\n```",
+      "latency_ms": 5136.901799996849
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Burns\",\n  \"claim_method\": \"Cashless Payment\",\n  \"reasoning\": \"The patient has suffered a severe burn injury requiring hospitalization and specialized care such as sterile isolation room burns and necroscopy. The insurance policy is POL-73606441.\"\n}\n```",
+      "latency_ms": 4326.524500007508
+    },
+    {
+      "raw_output": "Berikut adalah analisis triage dan penilaian dari klaim tersebut:\n\n```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Infectious Disease - Pneumonia\",\n  \"claim_method\": \"Hospitalization and Inpatient Care\",\n  \"reasoning\": \"The patient is seeking reimbursement for hospitalization costs due to pneumonia, which is a serious infectious disease condition requiring immediate medical attention.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Health karena klaim ini berkaitan dengan kondisi kesehatan.\n2. **Urgency**: High karena kondisi pneumonia merupakan kondisi medis yang serius dan memerlukan perawatan segera.\n3. **Primary Condition**: Infectious Disease - Pneumonia karena kondisi ini disebutkan sebagai peny",
+      "latency_ms": 8944.825100013986
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"appendectomy\",\n  \"claim_method\": \"inpatient\",\n  \"reasoning\": \"The patient has undergone an appendectomy and requires hospitalization. A new room is needed for the patient's recovery.\"\n}\n```",
+      "latency_ms": 3431.2095000059344
+    },
+    {
+      "raw_output": "Untuk melakukan triage dan analisis klaim ini, saya akan memeriksa beberapa faktor penting seperti jenis klaim, alasan klaim, dan kondisi medis. Namun, karena konteks dan data yang diberikan sangat spesifik tentang RSUP Dr. Kariadi Semarang Surabaya, saya tidak dapat memberikan rekomendasi atau kategori tertentu tanpa melihat detail lebih lanjut dari laporan klaim tersebut.\n\nNamun, jika Anda bisa memberikan detail tambahan seperti:\n1. Jenis klaim apa yang diminta?\n2. Apakah ada masalah medis yang disebabkan oleh kegagalan layanan kesehatan?\n3. Apakah ada masalah medis lainnya yang perlu ditangani?\n\nSaya akan dapat membantu menilai urgensi",
+      "latency_ms": 8652.234400011366
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Infectious Bronchopneumonia\",\n  \"claim_method\": \"Direct Payment\",\n  \"reasoning\": \"The patient has a high probability of having an infectious bronchopneumonia due to the symptoms and medical history provided. The total bill is significant ($9.7 million), indicating that this is a serious condition requiring immediate attention.\"\n}\n```",
+      "latency_ms": 4901.709400000982
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"cardiovascular disease\",\n  \"claim_method\": \"in-person visit to hospital\",\n  \"reasoning\": \"The patient has a high risk of cardiovascular events due to the bypass surgery and requires immediate medical attention.\"\n}\n```",
+      "latency_ms": 3562.240800005384
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"health\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"bronchopneumonia\",\n  \"claim_method\": \"hospitalization\",\n  \"reasoning\": \"The patient is seeking reimbursement for hospitalization and treatment due to bronchopneumonia.\"\n}\n```",
+      "latency_ms": 3448.199200007366
+    },
+    {
+      "raw_output": "Untuk melanjutkan proses triaging dan analisis klaim ini, saya akan membangun sebuah model prediktif berbasis data untuk menentukan tingkat urgensi dan kategori klaim. Namun, sebelum itu, saya perlu beberapa informasi tambahan dari Anda.\n\n1. **Pengenalan Data**: Untuk melakukan analisis, saya membutuhkan dataset lengkap tentang klaim asuransi jiwa dan kesehatan. Dataset ini harus mencakup semua detail klaim seperti jenis klaim, kondisi medis, alasan klaim, dan waktu klaim dilaporkan.\n\n2. **Analisis Klaim**: Setelah mendapatkan dataset, saya akan menggunakan metode statistik dan machine learning untuk merumuskan model prediktif. Model ini akan digunakan untuk memprediksi tingkat urg",
+      "latency_ms": 8836.090400000103
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Hernia Surgery\",\n  \"claim_method\": \"Cashless Payment\",\n  \"reasoning\": \"The patient is scheduled for a hernia surgery and will be staying at the hospital for 4 days. The cashless payment method has been approved.\"\n}\n```",
+      "latency_ms": 4080.963599990355
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"head injury and fracture in the leg\",\n  \"claim_method\": \"in-person visit to hospital\",\n  \"reasoning\": \"The patient suffered a head injury and a leg fracture due to a fall from a roof while working, requiring an emergency operation. The incident is considered serious enough for immediate medical attention.\"\n}\n```",
+      "latency_ms": 5181.812399998307
+    },
+    {
+      "raw_output": "Berikut adalah analisis triage dan analisis klaim dari laporan tersebut:\n\n```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"urgent\",\n  \"primary_condition\": \"respiratory distress due to acute asthma attack\",\n  \"claim_method\": \"nebulization and oxygen therapy\",\n  \"reasoning\": \"The patient is experiencing severe respiratory distress due to an acute asthma attack. The treatment provided includes nebulization with two cycles and oxygen therapy at the hospital.\"\n}\n```\n\nPenjelasan:\n1. **Category**: \"medical\" - Klaim ini berkaitan dengan kesehatan.\n2. **Urgency**: \"urgent\" - Kondisi medis ini sangat penting dan perlu segera ditangani.\n3. **Primary Condition**: \"respiratory distress due to acute asthma attack\" - Pas",
+      "latency_ms": 9641.924299998209
+    },
+    {
+      "raw_output": "Berikut adalah analisis klaim dari laporan tersebut:\n\n```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Colitis Renal\",\n  \"claim_method\": \"Cashless\",\n  \"reasoning\": \"The patient is currently hospitalized at RS Mayapada for observation due to colitis renal caused by ureterolithiasis and has been recommended a URS procedure with inpatient stay of 2 days using cashless payment method.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Health - Klaim ini berkaitan dengan kondisi kesehatan.\n2. **Urgency**: High - Pasien memerlukan perawatan segera karena kondisi kritis seperti colitis renal.\n3. **Primary Condition**: Colitis Renal - Kondisi utama yang",
+      "latency_ms": 10431.700299988734
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"hemorrhagic hemorrhage\",\n  \"claim_method\": \"inpatient treatment\",\n  \"reasoning\": \"The patient suffered a massive hemorrhage in the nose and requires immediate medical attention at an emergency room. The cost of hospitalization is high, and there's no insurance coverage for such severe injuries.\"\n}\n```",
+      "latency_ms": 4275.137699994957
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Injury from foreign object\",\n  \"claim_method\": \"Cashless\",\n  \"reasoning\": \"The patient is seeking treatment for an injury caused by a foreign object in their ear and has already been admitted to the hospital with a scheduled appointment for an emergency extraction procedure. The patient wishes to proceed without using insurance.\"\n}\n```\n\nPenjelasan:\n- **Category**: Health - Menggambarkan bahwa klaim ini berkaitan dengan kesehatan.\n- **Urgency**: High - Klaim ini memerlukan perhatian cepat karena ada masalah medis yang signifikan.\n- **Primary Condition**: Injury from foreign object - Menunjukkan kondisi medis utama yang dialami oleh pasien.\n- **Claim",
+      "latency_ms": 8688.954499986721
+    },
+    {
+      "raw_output": "Berikut adalah analisis klaim tersebut menggunakan skema ClaimTriageOutput:\n\n```json\n{\n  \"category\": \"Disease\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Chronic Kidney Disease\",\n  \"claim_method\": \"Surat Rujukan Nefrologi + Hasil Laboratorium\",\n  \"reasoning\": \"Pasien melaporkan klaim atas Indikasi Chronic Kidney Disease Stage V, yang dinyatakan oleh surat rujukan dari dokter nephrologi dan hasil laboratorium yang disertakan dalam polis. Klaim ini memerlukan perawatan medis intensif dan harus segera diambil langkah.\",\n}\n```\n\nPenjelasan:\n- **Category**: Dalam hal ini, kondisi penyakit atau masalah kesehatan.\n- **",
+      "latency_ms": 8781.436399993254
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Pneumotorax and Fracture\",\n  \"claim_method\": \"Cashless Darurat\",\n  \"reasoning\": \"The patient has suffered a severe injury with multiple fractures and a pneumotorax, requiring immediate medical attention in the form of a chest tube for wound drainage. The condition is critical and requires urgent intervention.\"\n}\n```",
+      "latency_ms": 4607.4805999815
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Hypertension\",\n  \"claim_method\": \"In-Patient Visit\",\n  \"reasoning\": \"The patient's blood pressure is abnormally high at 210/120 mmHg and requires immediate medical attention. The patient was given antihypertensive medication sublingually and observed for 3 hours before being discharged to follow-up with a hospital visit. This indicates an urgent need for further intervention.\"\n}\n```",
+      "latency_ms": 5487.694700015709
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"HIPERTENSI\",\n  \"urgency\": \"URGENT\",\n  \"primary_condition\": \"HIPERTENSI\",\n  \"claim_method\": \"RECORDS_REVIEW\",\n  \"reasoning\": \"The patient's history of hypertension is not documented during the SPAJ process and a previous medical record review is required to support the denial of the claim at RS Premier Bintaro.\"\n}\n```",
+      "latency_ms": 4500.7026999956
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"hernia surgery\",\n  \"claim_method\": \"in-person visit\",\n  \"reasoning\": \"The patient is scheduled for a hernia operation at RS Santosa Bandung and has attached the doctor's recommendation letter to their insurance policy. This indicates that an in-person medical procedure is expected.\"\n}\n```\n\n### Field Explanation:\n- **category**: `medical` - Indicates this is related to a medical condition or procedure.\n- **urgency**: `high` - The condition requires immediate attention due to the planned surgical intervention.\n- **primary_condition**: `hernia surgery` - The main issue being addressed by the surgery.\n- **claim_method**: `in-person visit` - The method of claiming the service involves an in-person visit to the hospital.\n-",
+      "latency_ms": 8696.734400000423
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"critical illness\",\n  \"claim_method\": \"hospitalization\",\n  \"reasoning\": \"The diagnosis is critical illness and the patient has been hospitalized at RSUP Fatmawati. The doctor's report indicates that the condition was diagnosed on day 7 after the policy took effect, which may not meet the criteria for a quick resolution.\"\n}\n```",
+      "latency_ms": 4566.657699993812
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Excess Charge on Cashless Payment\",\n  \"claim_method\": \"Email Submission\",\n  \"reasoning\": \"The user is requesting a detailed calculation for the excess charge on their cashless payment at RS Wahidin Sudirohusodo Makassar. They have also requested that an official proof be sent to them via email with their policy number.\"\n}\n```",
+      "latency_ms": 4767.810299992561
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"head injury and fracture in the leg\",\n  \"claim_method\": \"in-person visit to hospital\",\n  \"reasoning\": \"The patient suffered a head injury and a leg fracture due to a fall from a height, which requires immediate medical attention.\"\n}\n```",
+      "latency_ms": 3816.0481000086293
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Medical\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Respiratory distress due to food poisoning from contaminated seafood\",\n  \"claim_method\": \"Emergency medical treatment at a hospital\",\n  \"reasoning\": \"The patient experienced severe respiratory symptoms after consuming potentially contaminated seafood, which requires immediate emergency medical intervention.\"\n}\n```",
+      "latency_ms": 3807.2914000076707
+    },
+    {
+      "raw_output": "Berikut adalah analisis triage dan penilaian dari laporan klaim tersebut:\n\n```json\n{\n  \"category\": \"stroke\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"stroke\",\n  \"claim_method\": \"police report\",\n  \"reasoning\": \"Stroke is a medical emergency and requires immediate attention.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Stroke - Dikategorikan sebagai stroke karena kondisi medis yang ditemui.\n2. **Urgency**: high - Kondisi ini sangat penting dan memerlukan perhatian cepat, seperti stroke merupakan kondisi medis yang dapat menimbulkan kerusakan jantung dan otak jika tidak segera ditangani.\n3. **Primary Condition**: stroke - Kondisi utama yang harus diwaspadai dan",
+      "latency_ms": 8814.676599984523
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"burns\",\n  \"claim_method\": \"in-person visit\",\n  \"reasoning\": \"The incident is a severe accident involving burns from an explosion caused by a gas leak in the home. The patient has multiple burn injuries requiring immediate medical attention and hospitalization.\"\n}\n```",
+      "latency_ms": 3912.9030000185594
+    },
+    {
+      "raw_output": "Berikut adalah analisis klaim tersebut berdasarkan skema ClaimTriageOutput:\n\n```json\n{\n  \"category\": \"Disease\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Chronic Kidney Disease\",\n  \"claim_method\": \"Surat Rujukan Nefrologi + Hasil Laboratorium\",\n  \"reasoning\": \"Pasien melaporkan klaim atas Indikasi Chronic Kidney Disease Stage V, yang dianalogikan sebagai kondisi medis serius yang memerlukan perawatan intensif seperti dialisis. Surat rujukan nefrologi dan hasil laboratorium memberikan bukti ilmiah yang cukup kuat untuk menunjukkan bahwa kondisi ini merupakan alasan utama untuk klaim.\"\n}\n```\n\nPenjelasan:\n1. **Category**: D",
+      "latency_ms": 8994.37850000686
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"health\",\n  \"urgency\": \"low\",\n  \"primary_condition\": \"pusing\",\n  \"claim_method\": \"medical visit\",\n  \"reasoning\": \"The patient visited a hospital for general stomach pain without any indication of an emergency situation. The policy's conditions for urgent claims are not specified in the provided information.\"\n}\n```",
+      "latency_ms": 3890.121700009331
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"injury\",\n  \"claim_method\": \"medical_insurance_claim\",\n  \"reasoning\": \"The patient has sustained a severe injury requiring immediate medical attention and imaging to assess the extent of damage.\"\n}\n```",
+      "latency_ms": 3372.923399991123
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"heart attack\",\n  \"claim_method\": \"inpatient care\",\n  \"reasoning\": \"The patient is experiencing a severe heart attack requiring immediate inpatient care and urgent medical intervention.\"\n}\n```",
+      "latency_ms": 3214.6421000070404
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"rupture_of_the_abdominal_arteries\",\n  \"claim_method\": \"emergency_medical_care\",\n  \"reasoning\": \"The patient suffered a ruptured abdominal artery due to a car accident at the port and requires emergency surgery for laparotomy.\"\n}\n```",
+      "latency_ms": 4028.767699986929
+    },
+    {
+      "raw_output": "Berikut adalah analisis triage dan analisis klaim untuk laporan nasabah Robert Santoso:\n\n```json\n{\n  \"category\": \"Medical\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"CABG (Coronary Artery Bypass Graft)\",\n  \"claim_method\": \"Hospitalization and Surgery\",\n  \"reasoning\": \"The patient has undergone a major surgery involving the bypass of coronary arteries, which is considered a critical medical procedure requiring immediate attention.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Dalam konteks ini, kondisi medis yang dianalisis adalah CABG (Coronary Artery Bypass Graft), yang merupakan perubahan jaringan korona yang sangat serius.\n2. **Urgency**: Dianggap sebagai high karena CABG adalah suatu perub",
+      "latency_ms": 8818.084799975622
+    },
+    {
+      "raw_output": "Berikut adalah analisis klaim tersebut menggunakan skema ClaimTriageOutput:\n\n```json\n{\n  \"category\": \"Healthcare\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Medical Treatment - Delivery or Surgical Procedure\",\n  \"claim_method\": \"Cashless Payment\",\n  \"reasoning\": \"The patient is seeking medical treatment for delivery or surgical procedure, which requires a cashless payment method. This indicates that the patient needs urgent attention and immediate care.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Health merupakan kategori utama karena klaim ini berkaitan dengan perawatan medis.\n2. **Urgency**: High menunjukkan bahwa klaim ini memerlukan perhatian cepat karena keadaan kritis.\n3. **Primary Condition**: Medical Treatment - Delivery or Surgical Procedure menunjukkan kondisi",
+      "latency_ms": 8725.764099974185
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Accident\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Burns\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The incident is a severe accident involving burns from an explosion caused by a gas leak in the home. The patient has multiple burn injuries requiring immediate medical attention and hospitalization.\"\n}\n```",
+      "latency_ms": 3998.3132000197656
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Exceeding Inner Limit\",\n  \"claim_method\": \"Reimbursement\",\n  \"reasoning\": \"The reimbursement amount is only 50% of the total claim amount due to an exceeding inner limit condition.\"\n}\n```",
+      "latency_ms": 3498.8853999821004
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"cardiovascular\",\n  \"claim_method\": \"inpatient\",\n  \"reasoning\": \"The patient has a severe heart attack requiring immediate ICU care and the installation of a stent in both coronary arteries.\"\n}\n```",
+      "latency_ms": 3457.9917999799363
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"urgent\",\n  \"primary_condition\": \"acute abdominal pain\",\n  \"claim_method\": \"in-person visit\",\n  \"reasoning\": \"The patient is seeking reimbursement for medical expenses incurred at a hospital due to acute abdominal pain, which requires immediate attention and treatment.\"\n}\n```",
+      "latency_ms": 3600.0268000061624
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Hemorrhagic Conjunctivitis\",\n  \"claim_method\": \"Direct Payment\",\n  \"reasoning\": \"The patient has a condition requiring immediate medical attention and treatment for hemorrhagic conjunctivitis. The case is urgent due to the need for prompt intervention and potential complications if not treated promptly.\"\n}\n```",
+      "latency_ms": 4383.137999975588
+    },
+    {
+      "raw_output": "Berikut adalah analisis triage dan penilaian dari laporan klaim tersebut:\n\n```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Necrotic Ulceration of the Heart\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The patient has a severe condition requiring immediate medical attention and treatment for necrotic ulceration of the heart. The cost is high at approximately Rp 10.7 million.\"\n}\n```\n\nPenilaian:\n1. **Category**: Health - Klaim ini berkaitan dengan kondisi medis.\n2. **Urgency**: High - Kondisi ini memerlukan perawatan segera karena keparahan kondisi.\n3. **Primary Condition**: Necrotic Ulceration of the Heart - Pen",
+      "latency_ms": 8784.032299998216
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Kolesistitis Kalkulosa\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The patient has been diagnosed with a serious condition requiring immediate medical attention and hospitalization for treatment.\"\n}\n```",
+      "latency_ms": 3569.559499999741
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"heart attack\",\n  \"claim_method\": \"inpatient care\",\n  \"reasoning\": \"Maya Anggraini's heart attack is severe and requires immediate medical attention including ICU admission and a stent procedure.\"\n}\n```",
+      "latency_ms": 3515.2283999777865
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Febrile Illness Suspected Tension\",\n  \"claim_method\": \"Inpatient Observation\",\n  \"reasoning\": \"The patient has a high fever for three days and is still being observed at the hospital. The diagnosis is not yet definitive, but there are concerns about possible typhoid fever.\"\n}\n```",
+      "latency_ms": 4516.019400005462
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"appendicitis\",\n  \"claim_method\": \"inpatient care\",\n  \"reasoning\": \"The patient is admitted for an appendectomy and the condition requires hospitalization, which justifies a high urgency level.\"\n}\n```",
+      "latency_ms": 4074.285900016548
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"medical\",\n  \"urgency\": \"urgent\",\n  \"primary_condition\": \"asma akut\",\n  \"claim_method\": \"inpatient care\",\n  \"reasoning\": \"The patient has been admitted to the hospital for acute asthma and is being treated there. The condition requires immediate attention but does not require emergency medical intervention.\"\n}\n```",
+      "latency_ms": 4460.008599999128
+    },
+    {
+      "raw_output": "Berikut adalah analisis triage dan klasifikasi dari laporan klaim tersebut:\n\n```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Infectious Disease - Pneumonia\",\n  \"claim_method\": \"Hospitalization and Inpatient Care\",\n  \"reasoning\": \"The patient is seeking reimbursement for hospitalization costs due to pneumonia, which is a serious infectious disease condition requiring immediate medical attention.\"\n}\n```\n\nPenjelasan:\n1. **Category**: Health - Klaim ini berkaitan dengan kondisi kesehatan.\n2. **Urgency**: High - Klaim ini memerlukan perhatian cepat karena kondisi kesehatan yang serius.\n3. **Primary Condition**: Infectious Disease - Pneumonia - Penyebab utama kl",
+      "latency_ms": 10745.980599982431
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"accident\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"laceration\",\n  \"claim_method\": \"cashless\",\n  \"reasoning\": \"The patient suffered a laceration on the left arm due to an electrical burn caused by a broken roof that fell down and injured seven screws in the hospital emergency room at RS Wahidin Sudirohusodo Makassar through a cashless accident policy with policy number POL-12634395.\"\n}\n```",
+      "latency_ms": 5584.743399987929
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Perforation or Hemorrhage\",\n  \"claim_method\": \"Emergency Visit to Hospital\",\n  \"reasoning\": \"The patient has a history of LASERASIS and PENDURAHAN IN THE LIVER, which increases the risk of perforation or hemorrhage. The injury is severe enough that an emergency visit to hospital is necessary.\"\n}\n```",
+      "latency_ms": 4750.658200006001
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Peritonitis\",\n  \"claim_method\": \"Injeksi Antinie\",\n  \"reasoning\": \"The patient experienced severe abdominal pain that required immediate medical attention at the hospital. The use of intravenous antibiotics and oral medication indicates a serious infection requiring prompt treatment.\"\n}\n```\n\n### Penjelasan:\n1. **Category**: Health - Ini menunjukkan bahwa klaim ini berkaitan dengan kesehatan.\n2. **Urgency**: High - Klaim ini sangat penting karena kondisi medis yang serius seperti infeksi peritoneal (peritonitis).\n3. **Primary Condition**: Peritonitis - Kondisi medis utama yang dialami oleh pasien.\n4. **Claim Method**: In",
+      "latency_ms": 8649.701300018933
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Health\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Hemorrhagic Event\",\n  \"claim_method\": \"In-Patient Care\",\n  \"reasoning\": \"The patient experienced a hemorrhagic event requiring immediate medical attention and treatment. The reimbursement amount is high due to the severity of the condition.\"\n}\n```",
+      "latency_ms": 3786.8754000228364
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Reimbursement for medical expenses\",\n  \"claim_method\": \"Manual review\",\n  \"reasoning\": \"The patient is seeking reimbursement for an operation at RS Hermina Kemayoran. The request includes a detailed list of the costs and a specific amount in Rupiah. This information suggests that the patient has already received treatment and is now requesting reimbursement.\"\n}\n```",
+      "latency_ms": 5009.224700013874
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"stroke\",\n  \"urgency\": \"high\",\n  \"primary_condition\": \"stroke\",\n  \"claim_method\": \"police report\",\n  \"reasoning\": \"The patient was diagnosed with a stroke on the fifth day after the policy was approved at RSU Fatmawati. The insurer claims that it is within the waiting period of 90 days from the date of approval of the policy.\"\n}\n```",
+      "latency_ms": 4654.139199992642
+    },
+    {
+      "raw_output": "```json\n{\n  \"category\": \"Claim\",\n  \"urgency\": \"High\",\n  \"primary_condition\": \"Account Balance Inquiry\",\n  \"claim_method\": \"Email/Phone\",\n  \"reasoning\": \"The customer is seeking information about the remaining balance on their loan and whether the room limit for their family policy remains at RRP 1.5 million per night.\"\n}\n```\n\nPenjelasan:\n- **Category**: Claim - Ini menunjukkan bahwa ini adalah permintaan klaim.\n- **Urgency**: High - Ini menunjukkan bahwa informasi yang diperlukan sangat penting dan harus segera dibuatkan.\n- **Primary Condition**: Account Balance Inquiry - Ini menunjukkan bahwa pertanyaan utama adalah tentang sisa saldo akun.\n- **Claim Method**: Email/Phone - Ini menunjukkan bahwa informasi",
+      "latency_ms": 9264.127300004475
+    }
+  ],
+  "control_results": [
+    {
+      "raw_output": "Untuk menyelesaikan soal ini, kita akan mengikuti langkah-langkah berikut:\n\n1. Hitung diskon awal:\n   Diskon awal adalah 20%, jadi diskonnya adalah 20/100 * Harga asli = 0.20 * Rp 500.000 = Rp 100.000\n\n2. Harga setelah diskon:\n   Harga setelah diskon adalah Harga asli - Diskon = Rp 500.000 - Rp 100.000 = Rp 400.000\n\n3. Hitung pajak pertambahan nilai (PPN):\n   PPN adalah 11%, jadi pajak yang harus dibayarkan adalah 11/100 * Harga setelah diskon = 0.11 * Rp 400.000 = Rp 44.000\n\n4. Total uang yang",
+      "latency_ms": 15343.560300010722
+    },
+    {
+      "raw_output": "Logikanya bisa diterjemahkan menjadi:\n\n\"Semua mamalia bernapas dengan paru-paru, jadi semua paus (yang merupakan mamalia) juga bernapas dengan paru-paru.\"\n\nPenjelasannya:\n1. \"Semua mamalia bernapas dengan paru-paru\" adalah premis utama yang dianggap benar.\n2. Premis ini menyatakan bahwa setiap mamalia memiliki organ paru-paru untuk nafas.\n3. \"Jadi semua paus (yang merupakan mamalia)\" adalah konklusi yang berdasarkan pada premis pertama.\n4. Konklusi menunjukkan bahwa semua paus memiliki organ paru-paru untuk nafas.\n\nDalam konteks logika matematika atau filosofi, ini dapat disebut sebagai \"logika implikasi\". Premis pertama mengimplikasikan premis kedua, sehingga jika premis pertama benar, maka premis kedua juga harus benar.",
+      "latency_ms": 19234.731300006388
+    },
+    {
+      "raw_output": "Jumlah total bola yang ada adalah 5 (merah) + 3 (hijau) + 2 (biru) = 10.\n\nBola yang tidak merah adalah 3 (hijau) + 2 (biru) = 5.\n\nPeluang untuk mengambil bola yang bukan merah adalah:\n- Banyaknya bola yang tidak merah / Total banyak bola = 5/10 = 1/2\n\nPersentase dari ini adalah:\n(1/2) * 100% = 50%\n\nJadi, peluang untuk mengambil bola yang bukan merah adalah 1/2 atau 50%.",
+      "latency_ms": 12459.0770000068
+    },
+    {
+      "raw_output": "Barisan bilangan yang diberikan adalah:\n\n2, 4, 8, 16, 32, ...\n\nUntuk menentukan angka berikutnya, kita perlu melihat polanya.\n\nPertama, lihat bagaimana setiap bilangan di atas dibagi dengan bilangan lain:\n- 4 ÷ 2 = 2\n- 8 ÷ 4 = 2\n- 16 ÷ 8 = 2\n- 32 ÷ 16 = 2\n\nKita melihat bahwa setiap bilangan dibagi dengan 2 untuk mendapatkan bilangan berikutnya.\nJadi, pola ini adalah \"dibagi dua\".\n\nAngka berikutnya dalam barisan ini akan dibagi dengan 2, jadi:\n- 32 ÷ 2 = 16 (yang sudah ada)\n- 16 ÷ 2 = 8 (yang sudah ada)\n- 8 ÷ 2 = 4 (yang sudah ada)\n-",
+      "latency_ms": 14742.36020000535
+    },
+    {
+      "raw_output": "Untuk menyelesaikan soal ini, kita perlu menghitung usia Ayah dan Budi secara berturut-berturut.\n\n1. Diketahui bahwa usia Ayah sekarang adalah 4 kali usia Budi.\n2. Jadi, jika kita misalkan usia Budi sekarang adalah x tahun, maka usia Ayah sekarang adalah 4x tahun.\n\n3. Kita juga diketahui bahwa empat tahun yang lalu, usia Ayah adalah 6 kali usia Budi di saat itu.\n   - Jadi, empat tahun yang lalu, usia Ayah adalah (4x - 4) tahun.\n   - Dan empat tahun yang lalu, usia Budi adalah (x - 4) tahun.\n\n4. Menyamakan kedua persamaian:\n   \\[ 4x = 6(x - 4) \\]\n\n5. Selesaikan persamaan ini untuk x:\n   \\[ 4",
+      "latency_ms": 16857.3083000083
+    },
+    {
+      "raw_output": "Here's the translation of the sentence into English:\n\n\"We express our gratitude for your cooperation and hope to establish long-term partnerships that mutually benefit us.\"\n\nThis translation maintains the meaning and tone of the original statement in a more formal context.",
+      "latency_ms": 3461.6186000057496
+    },
+    {
+      "raw_output": "Algoritma pemrosesan data mesin (machine learning) mengembalikan model matematik berdasarkan data pelatihan, yang dikenal sebagai data pelatihan, untuk membuat prediksi atau keputusan tanpa harus diprogram secara eksplisit untuk melakukan hal tersebut.",
+      "latency_ms": 3545.337399991695
+    },
+    {
+      "raw_output": "Peribahasa \"Don't put all your eggs in one basket\" dalam Bahasa Indonesia bisa diartikan sebagai \"Jangan terlalu banyak menaruh uang di satu tempat\". Makna dari peribahasa ini adalah mengingatkan agar seseorang tidak terburu-buru untuk berinvestasi atau melakukan sesuatu dengan cara yang terlalu risiko. Hal ini karena jika ada kerugian pada investasi tertentu, maka kerugian tersebut dapat merusak keseluruhan investasi. Oleh karena itu, lebih baik mempertimbangkan beberapa opsi dan memilih opsi yang aman sebelum membuat keputusan besar.",
+      "latency_ms": 7544.155900017358
+    },
+    {
+      "raw_output": "Before making an investment decision, ensure that you have read the prospectus and understand your financial risk profile.",
+      "latency_ms": 1247.1766000089701
+    },
+    {
+      "raw_output": "\"Zero-Shot Learning\" di Bahasa Indonesia bisa diterjemahkan sebagai \"Pelatihan Tanpa Batas Zero\". Ini adalah metode dalam Kecerdasan Buatan (AI) yang memungkinkan model atau algoritma untuk mengaplikasikan pengetahuan mereka pada data baru tanpa harus dilatih khusus terhadap semua jenis data.\n\n\"Fine-Tuning\" di Bahasa Indonesia bisa diterjemahkan sebagai \"Pemeliharaan Keesekian\". Ini adalah prosedur dalam Kecerdasan Buatan (AI) di mana model atau algoritma digunakan untuk menyesuaikan diri dengan data tertentu sehingga dapat merespons lebih efektif terhadap situasi spesifik tersebut. \n\nPerbedaan antara kedua istilah ini adalah bahwa \"Zero-Shot Learning\" mencakup pelatihan secara umum tanpa batas, sementara \"Fine-Tuning\" melibatkan penggunaan model atau algoritma untuk men",
+      "latency_ms": 11502.828399999999
+    },
+    {
+      "raw_output": "Berikut adalah kode Python untuk fungsi `is_palindrome(s)`, yang menerima satu parameter `s` berupa string dan mengembalikan nilai boolean:\n\n```python\ndef is_palindrome(s):\n    # Mengubah semua karakter menjadi lower case dan menghapus spasi\n    s = ''.join(e for e in s if e.isalnum()).lower()\n    \n    # Memeriksa apakah string tersebut palindrome\n    return s == s[::-1]\n\n# Contoh penggunaan\nprint(is_palindrome(\"A man, a plan, a canal: Panama\"))  # True\nprint(is_palindrome(\"racecar\"))  # True\nprint(is_palindrome(\"Python\"))  # False\n```\n\nKode di atas akan mencari apakah string `s` merupakan palindrom. Jika `s` memenuhi kriteria palindrom, maka fungsi akan mengembalikan `True`. Jika tidak, fungsi akan mengembalikan `False`.\n\nContoh penggunaan:\n- Fungsi `is_palindrome(\"",
+      "latency_ms": 11433.206399990013
+    },
+    {
+      "raw_output": "Berikut adalah implementasi algoritma Binary Search dalam Python:\n\n```python\ndef binary_search(arr, target):\n    left = 0\n    right = len(arr) - 1\n\n    while left <= right:\n        mid = (left + right) // 2\n        \n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    \n    return -1\n\n# Contoh penggunaan\narr = [2, 4, 6, 8, 10]\ntarget = 8\nindex = binary_search(arr, target)\nprint(index)  # Output: 3\n```\n\nPenggunaan ini mencari elemen tertentu di dalam array dan akan memberikan indeknya jika ada. Jika elemen tersebut tidak ada, maka fungsi akan mengembalikan -1.\n\nPerlu diingat bahwa algoritma Binary Search hanya dapat digunakan pada array yang sudah terurut. Jika",
+      "latency_ms": 11464.583399996627
+    },
+    {
+      "raw_output": "Untuk menggabungkan dua dictionaries dalam Python, Anda dapat menggunakan operasi union (`|`) yang tersedia pada versi 3.9 dan lebih baru, atau dengan menggunakan metode `.update()` untuk versi 3.8 dan sebelumnya.\n\nBerikut adalah contoh bagaimana Anda bisa melakukan ini:\n\n### Menggunakan Operasi Union\n\n```python\n# Contoh dictionary pertama\ndict_a = {'x': 1}\n\n# Contoh dictionary kedua\ndict_b = {'y': 2}\n\n# Menggunakan operasi union\ndict_c = dict_a | dict_b\n\nprint(dict_c)\n```\n\nOutput:\n```\n{'x': 1, 'y': 2}\n```\n\n### Menggunakan Metode update()\n\n```python\n# Contoh dictionary pertama\ndict_a = {'x': 1}\n\n# Contoh dictionary kedua\ndict_b = {'y': 2}\n\n# Menggunakan metode update()\ndict_a.update(dict_b)\n\nprint(dict_a)\n```\n\nOutput:\n```\n{'x': 1",
+      "latency_ms": 11665.22380002425
+    },
+    {
+      "raw_output": "Berikut adalah contoh fungsi Python untuk mencari bilangan Fibonacci ke-n dengan pendekatan iteratif dan memori optimasi (memoization):\n\n```python\ndef fibonacci(n):\n    # Dictionary to store previously computed values\n    fib_cache = {0: 1, 1: 1}\n\n    def _fib(n):\n        if n in fib_cache:\n            return fib_cache[n]\n        \n        # Compute the nth Fibonacci number using recursion with memoization\n        fib_cache[n] = _fib(n-1) + _fib(n-2)\n        return fib_cache[n]\n\n    # Return the nth Fibonacci number\n    return _fib(n)\n\n# Test cases\nprint(fibonacci(3))   # Output: 2\nprint(fibonacci(6))   # Output: 8\nprint(fibonacci(10))  # Output: 55\n```\n\nPada kode di atas, kita telah menambahkan dictionary `fib_cache` untuk menyimpan hasil rekursi sebelumnya. Jika suatu nilai Fibonacci sudah d",
+      "latency_ms": 11818.098999996437
+    },
+    {
+      "raw_output": "Berikut adalah query SQL yang dapat Anda gunakan:\n\n```sql\nSELECT \n    customer_id,\n    SUM(total) AS total_belanja\nFROM \n    orders\nGROUP BY \n    customer_id\nORDER BY \n    total_belanja DESC\nLIMIT 3;\n```\n\nPenjelasan:\n1. **SUM(total)**: Menghitung jumlah total belanja setiap pelanggan.\n2. **GROUP BY customer_id**: Memotong data berdasarkan id pelanggan.\n3. **ORDER BY total_belanja DESC**: Menyaring data berdasarkan total belanja dalam urutan yang ditentukan (descending).\n4. **LIMIT 3**: Mencari top 3 hasilnya.\n\nJika Anda ingin mencari pelanggan teratas berdasarkan total belanja tertinggi, maka Anda bisa menggunakan GROUP BY dan ORDER BY bersama-sama seperti ini:\n\n```sql\nSELECT \n    customer_id,\n    SUM(total) AS total_belanja\nFROM \n    orders\nGROUP BY \n    customer_id\nORDER BY \n    SUM(total",
+      "latency_ms": 11447.682799975155
+    },
+    {
+      "raw_output": "Indonesia merdeka pada tanggal 17 Agustus 1945. Proklamasi kemerdekaan dibaca oleh Soekarno di Gedung Parlemen Jakarta. Soekarno adalah Presiden pertama dari Republik Indonesia.",
+      "latency_ms": 2973.9397000230383
+    },
+    {
+      "raw_output": "Pembelahan sel mitotis dan meiosis adalah dua proses penting dalam reproduksi sel di organisme eukariota (seperti manusia). Mereka memerlukan energi yang signifikan dan memiliki beberapa perbedaan utama:\n\n1. Proses Pembelahan:\n   - Mitosis: Melakukan pada sel-sel yang tidak berfungsi atau akan matang.\n   - Meiosis: Melakukan pada sel-sel yang masih aktif untuk reproduksi.\n\n2. Fase Fokus:\n   - Mitosis: 4 fase fokus (sebelumnya disebut asimetris).\n   - Meiosis: 3 fase fokus (asimetris).\n\n3. Fase Fokus:\n   - Mitosis: Telomere terjadi sepanjang sel.\n   - Meiosis: Telomere dibagi menjadi dua.\n\n4. Fase Fokus:\n   - Mitosis: Seluruh sel dipertahankan.\n   - Meiosis: Seluruh sel dibagi.\n\n5. Fase F",
+      "latency_ms": 11169.898699998157
+    },
+    {
+      "raw_output": "Ibukota negara Australia adalah Canberra.\n\nKota dengan populasi terbesar di Australia saat ini adalah Sydney. Kota ini memiliki populasi sekitar 5,3 juta orang (2021).",
+      "latency_ms": 2438.393400021596
+    },
+    {
+      "raw_output": "Pada siang hari, langit tampak berwarna biru karena terdapat beberapa faktor yang mempengaruhi cahaya matahari dan perubahan warna tersebut.\n\n1. Cahaya Matahari: Cahaya matahari yang masuk ke atmosfer bumi melalui jarak panjang (sekitar 8 minit) menghasilkan cahaya dengan warna kuning atau hijau. \n\n2. Perubahan Warna: Karena warna ini tidak dapat keluar dari atmosfer bumi, ia menyebar dalam bentuk gelap dan merah. Namun, warnanya menjadi lebih gelap dan merah ketika diterima oleh benda-benda di permukaan bumi seperti tanaman dan hewan.\n\n3. Pencahayaan Langit: Langit tampak berwarna biru karena ada dua hal yang membuat cahaya matahari yang masuk ke atmosfer bumi menjadi lebih gelap dan merah. Pertama, cahaya matahari yang masuk ke",
+      "latency_ms": 11282.983000011882
+    },
+    {
+      "raw_output": "Stack dan Queue adalah dua jenis struktur data yang digunakan dalam pemrograman untuk menyimpan dan mengakses elemen-elemen data. Meskipun mereka memiliki beberapa simbolisasi yang sama seperti \"stack\" dan \"queue\", mereka memiliki perbedaan kritis dalam hal cara mereka bekerja.\n\n1. Struktur Data Stack:\n   - Peraturannya: Elemen baru diisi ke stack hanya jika ada tempat kosong di atasnya.\n   - Prinsip Operasi: LIFO (Last In First Out)\n   - Contoh penggunaan: Pencarian terakhir, menangani laporan masuk, dll.\n\n2. Struktur Data Queue:\n   - Peraturannya: Elemen baru diisi ke queue jika ada tempat kosong di bawahnya.\n   - Prinsip Operasi: FIFO (First In First Out)\n   - Contoh penggunaan: Menyusun pesan, menampilkan acara berikutnya, dll.\n\nPerbedaannya:\n\n1. Tempat Penempatan:",
+      "latency_ms": 11387.222599994857
+    },
+    {
+      "raw_output": "Berikut adalah contoh email yang dapat Anda gunakan:\n\nSubject: Permohonan Cuti Tahunan Selama 3 Hari Kerja\n\nDokter,\nSaya minta maaf jika saya membingungkan atau menimbulkan kesulitan dalam proses ini. Saya sangat mementingkan dan berharap bahwa saya bisa membantu di mana pun itu.\n\nSebagai seorang karyawan di [Nama Perusahaan], saya telah memberikan semua penilaian terbaik untuk pekerjaan saya dan saya merasa puas dengan apa yang saya lakukan. Namun, pada akhirnya, saya memiliki kebutuhan yang mendesak untuk pulang ke rumah dan melihat keluargaku.\n\nKebutuhan saya mendesak karena ada sesuatu yang harus saya lakukan di rumah. Ini termasuk masalah yang tidak dapat dihindari dan juga beberapa hal lain yang perlu saya lakukan sebagai individu. \n\nSaya harapkan anda akan setuju bahwa ini adalah alasan yang sah dan",
+      "latency_ms": 11944.321299990406
+    },
+    {
+      "raw_output": "1. **Pertimbangkan Waktu Kerja yang Tepat**: Cobalah untuk memulai pekerjaan Anda di waktu tertentu setiap hari. Misalnya, mulailah dengan menulis atau mengerjakan tugas yang lebih berat pada pukul 9 malam. Ini bisa membantu Anda merasa lebih teratur dan dapat mengurangi kebingungan dan kesulitan fokus.\n\n2. **Gunakan Teknologi yang Baik**: Gunakan perangkat lunak seperti Pomodoro atau Freedom Tasker untuk mengontrol waktu kerja Anda. Mereka memberi Anda interval waktu yang tepat untuk istirahat dan penenangan, serta memberi Anda waktunya untuk melakukan sesi-sesi berbeda dalam satu hari.\n\n3. **Jadwal Kesehatan dan Aktivitas Fisik**: Jika mungkin, cobalah untuk melakukan aktivitas fisik selama beberapa menit setiap kali Anda melihat layar. Hal ini bisa bermanfaat bagi",
+      "latency_ms": 11655.192099977285
+    },
+    {
+      "raw_output": "Cloud computing adalah cara kerja di mana data dan aplikasi disimpan di server besar yang terhubung secara global (cloud). Ini mirip seperti membeli kantong plastik untuk menyimpan barang-barang Anda - jika Anda mencampurkan banyak barang dalam satu kantong, maka barang tersebut akan mudah hilang atau sulit ditemukan. \n\nDalam cloud computing, semua informasi dan program dapat disimpan di server yang berada di seluruh dunia. Jadi, ketika Anda mengaksesnya, itu seperti membuka kantong tersebut dan menarik apa yang Anda butuhkan.\n\nSelain itu, seperti menggunakan layanan laundry online, Anda bisa mendapatkan akses ke berbagai layanan tanpa harus repot-repot membuat akun sendiri. Dengan cloud computing, ini bisa menjadi sangat efisien karena Anda hanya perlu mendaftar sekali dan kemudian dapat mengakses semua layanan yang Anda butuhkan dari mana saja dan kapan saja.\n\nSecara umum, cloud computing member",
+      "latency_ms": 11378.255799994804
+    },
+    {
+      "raw_output": "Berolahraga rutin selama 30 menit setiap hari memberikan banyak manfaat untuk kesehatan mental dan fisik. Olahraga dapat membantu meredakan stres dan meningkatkan mood, serta memperkuat sistem imun dan melindungi dari penyakit kronis seperti diabetes dan kanker. Selain itu, olahraga juga bisa membantu dalam penurunan berat badan, meningkatkan kekebalan tubuh, dan mencegah masalah kesehatan lainnya. Oleh karena itu, olahraga rutin adalah hal yang wajib dijalani oleh semua orang agar mendapatkan manfaat yang maksimal.",
+      "latency_ms": 10864.361000014469
+    },
+    {
+      "raw_output": "Halo! Saya adalah asisten digital yang dirancang untuk membantu Anda dengan berbagai tugas dan informasi. Beberapa keunggulan saya antara lain:\n\n1. Bisa berkomunikasi dalam berbagai bahasa: Bahasa Indonesia, Inggris, Mandarin, Jerman, Prancis, Italia, dan banyak lagi.\n\n2. Berbasis AI: Dapat memproses dan menganalisis data cepat dan akurat.\n\n3. Mengerti dan menjawab pertanyaan dari berbagai topik.\n   \n4. Membantu dalam berbagai tugas seperti menemukan informasi, membuat rencana, mengatur waktu, dan lebih banyak lagi.\n\n5. Menyediakan dukungan 24/7.\n\n6. Memiliki kemampuan untuk belajar dan meningkatkan kinerja setiap hari.\n\nJadi, jika Anda memiliki pertanyaan atau permasalahan, jangan ragu untuk bertanya kepada saya. Saya di sini untuk membantu Anda!",
+      "latency_ms": 16673.50120001356
+    }
+  ]
+}

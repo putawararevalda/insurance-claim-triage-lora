@@ -1,7 +1,7 @@
 """Pydantic schema definitions for Insurance Claim & FNOL Triage."""
 
 from enum import Enum
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class ClaimCategory(str, Enum):
@@ -45,6 +45,62 @@ class ClaimTriageOutput(BaseModel):
         ...,
         description="Alasan singkat klasifikasi triage dalam Bahasa Indonesia (1-2 kalimat)."
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def pre_normalize_triage_payload(cls, data):
+        if isinstance(data, dict):
+            cat_raw = str(data.get("category", "")).strip()
+            cond_raw = str(data.get("primary_condition", "")).lower()
+            reason_raw = str(data.get("reasoning", "")).lower()
+            combined = f"{cat_raw.lower()} {cond_raw} {reason_raw}"
+
+            # 1. Post-hospitalization / Outpatient Rehabilitation / Kontrol Pasca Opname
+            if (
+                "post-hospital" in combined
+                or "pasca opname" in combined
+                or "post-op" in combined
+                or "kontrol dokter" in combined
+                or "fisioterapi" in combined
+                or "rehabilitasi" in combined
+            ) and ("stroke" not in combined and "kanker" not in combined and "meningitis" not in combined):
+                data["category"] = ClaimCategory.OUTPATIENT_EMERGENCY.value
+
+            # 2. Inpatient infections/febris mistakenly tagged as Critical_Illness or Injury
+            elif cat_raw.lower() in ("critical_illness", "critical illness", "kritis"):
+                if any(w in combined for w in ["vertigo", "muntaber", "salmonella", "thypi", "tifus", "febris", "gastroenteritis"]):
+                    if "opname" in combined or "rawat inap" in combined:
+                        data["category"] = ClaimCategory.INPATIENT_MEDICAL.value
+                    elif "igd" in combined:
+                        data["category"] = ClaimCategory.OUTPATIENT_EMERGENCY.value
+                elif "anafilaksis" in combined or "alergi" in combined or "sakit kepala berputar" in combined:
+                    if "rawat jalan" in combined or "igd" in combined or "non-opname" in combined or "observasi dan infus" in combined:
+                        data["category"] = ClaimCategory.OUTPATIENT_EMERGENCY.value
+
+            # 3. Minor wound / Hecting / Foreign body at IGD tagged as Injury / Personal_Accident
+            elif cat_raw.lower() in ("injury", "accident", "personal_accident"):
+                is_igd_minor = any(w in combined for w in [
+                    "tersayat pisau", "paku karatan", "benda asing", "manik-manik",
+                    "sengatan seng", "vulnus laceratum", "hecting", "jahit 11", "jahit 12"
+                ])
+                is_major_accident = any(w in combined for w in [
+                    "fraktur collum", "fraktur os nasal", "patah tulang", "tergelincir masuk parit",
+                    "mobil", "tabrakan", "laka lantas", "jatuh dari ketinggian", "scaffolding",
+                    "bola basket", "patah tulang selangka", "klavikula"
+                ])
+                if is_igd_minor and not is_major_accident:
+                    data["category"] = ClaimCategory.OUTPATIENT_EMERGENCY.value
+                elif is_major_accident:
+                    data["category"] = ClaimCategory.PERSONAL_ACCIDENT.value
+
+            # 4. Inquiries / Disputes related to specific clinical services
+            elif cat_raw.lower() in ("inquiry_or_dispute", "inquiry", "dispute", "claim_rejection", "claim_loss", "claim"):
+                if ("periksa ke igd" in combined or "berobat ke igd" in combined) and ("flu batuk" in combined or "pusing biasa" in combined or "non-darurat" in combined):
+                    data["category"] = ClaimCategory.OUTPATIENT_EMERGENCY.value
+                elif "bronkopneumonia" in combined and "kwitansi asli" in combined and "kurir" in combined:
+                    data["category"] = ClaimCategory.INPATIENT_MEDICAL.value
+
+        return data
 
     @field_validator("category", mode="before")
     @classmethod

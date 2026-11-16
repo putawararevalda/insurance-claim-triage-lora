@@ -39,7 +39,7 @@ if not logger.handlers:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 
-def parse_args():
+def parse_args(args=None):
     parser = argparse.ArgumentParser(description="Alpha QLoRA Training with Experiment Tracking (W&B / MLflow).")
     
     # Model & Data
@@ -57,6 +57,12 @@ def parse_args():
     parser.add_argument("--lora_r", type=int, default=16, help="LoRA rank")
     parser.add_argument("--lora_alpha", type=int, default=32, help="LoRA scaling alpha")
     parser.add_argument("--lora_dropout", type=float, default=0.05, help="LoRA dropout rate")
+    parser.add_argument(
+        "--target_modules",
+        type=str,
+        default="attention",
+        help="Target modules for LoRA: 'attention' (q,k,v,o), 'all-linear' (q,k,v,o,gate,up,down), or comma-separated list",
+    )
     parser.add_argument("--max_length", type=int, default=512, help="Max sequence length")
     
     # Experiment Tracking
@@ -93,6 +99,12 @@ def parse_args():
         help="MLflow tracking URI",
     )
     
+    # Custom Logging File Paths
+    parser.add_argument("--metrics_csv", type=str, default=None, help="Path to metrics CSV file")
+    parser.add_argument("--metrics_jsonl", type=str, default=None, help="Path to metrics JSONL file")
+    parser.add_argument("--run_summary_json", type=str, default=None, help="Path to run summary JSON file")
+    parser.add_argument("--val_samples_jsonl", type=str, default=None, help="Path to val samples JSONL file")
+    
     # Logging & Cadence
     parser.add_argument("--logging_steps", type=int, default=5, help="Logging step interval")
     parser.add_argument("--eval_strategy", type=str, default="epoch", choices=["epoch", "steps", "no"])
@@ -104,7 +116,7 @@ def parse_args():
     parser.add_argument("--smoke_test", action="store_true", help="Quick test run with small dataset and 5 steps to verify tracking")
     parser.add_argument("--max_steps", type=int, default=-1, help="Force training to stop after N steps (-1 for full epochs)")
     
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
 def load_fixed_val_samples(val_file: str, n_samples: int = 4) -> List[Dict[str, Any]]:
@@ -145,8 +157,8 @@ def load_fixed_val_samples(val_file: str, n_samples: int = 4) -> List[Dict[str, 
     return selected
 
 
-def train_alpha():
-    args = parse_args()
+def train_alpha(cli_args=None):
+    args = parse_args(cli_args)
     
     print("=" * 70)
     print("  PHASE 2 ALPHA: QLORA TRAINING WITH CENTRALIZED EXPERIMENT TRACKING")
@@ -154,6 +166,7 @@ def train_alpha():
     print(f"Model ID           : {args.model_id}")
     print(f"Tracker Selected   : {args.tracker}")
     print(f"LoRA Config        : r={args.lora_r}, alpha={args.lora_alpha}, dropout={args.lora_dropout}")
+    print(f"Target Modules     : {args.target_modules}")
     print(f"Batch Size (Eff.)  : {args.batch_size} * {args.grad_accum} = {args.batch_size * args.grad_accum}")
     print(f"Output Directory   : {args.output_dir}")
     print(f"Checkpoint Dir     : {args.checkpoint_dir}")
@@ -181,6 +194,7 @@ def train_alpha():
         "lora_r": args.lora_r,
         "lora_alpha": args.lora_alpha,
         "lora_dropout": args.lora_dropout,
+        "target_modules": args.target_modules,
         "max_length": args.max_length,
         "quantization": "4-bit NF4 double quant",
         "gpu_device": torch.cuda.get_device_name(0),
@@ -198,10 +212,10 @@ def train_alpha():
     )
 
     # 2. Setup Local CSV / JSONL Logger
-    local_csv_path = "logs/alpha_metrics.csv"
-    local_jsonl_path = "logs/alpha_metrics.jsonl"
-    local_summary_path = "logs/alpha_run_summary.json"
-    local_samples_path = "logs/alpha_validation_samples.jsonl"
+    local_csv_path = args.metrics_csv or "logs/alpha_metrics.csv"
+    local_jsonl_path = args.metrics_jsonl or "logs/alpha_metrics.jsonl"
+    local_summary_path = args.run_summary_json or "logs/alpha_run_summary.json"
+    local_samples_path = args.val_samples_jsonl or "logs/alpha_validation_samples.jsonl"
     local_logger = LocalExperimentLogger(
         csv_path=local_csv_path,
         jsonl_path=local_jsonl_path,
@@ -251,11 +265,19 @@ def train_alpha():
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     model.config.use_cache = False  # Required when gradient checkpointing is enabled
 
+    # Parse target modules
+    if args.target_modules == "all-linear":
+        target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+    elif args.target_modules in ("attention", "attn"):
+        target_modules = ["q_proj", "k_proj", "v_proj", "o_proj"]
+    else:
+        target_modules = [m.strip() for m in args.target_modules.split(",")]
+
     lora_config = LoraConfig(
         r=args.lora_r,
         lora_alpha=args.lora_alpha,
         lora_dropout=args.lora_dropout,
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        target_modules=target_modules,
         bias="none",
         task_type="CAUSAL_LM",
     )
@@ -273,6 +295,8 @@ def train_alpha():
 
     eval_strategy = args.eval_strategy
     save_strategy = args.save_strategy
+    if eval_strategy != "no" and save_strategy != eval_strategy:
+        save_strategy = eval_strategy
     eval_steps = args.eval_steps if eval_strategy == "steps" else None
     save_steps = args.eval_steps if save_strategy == "steps" else None
     max_steps = args.max_steps if args.max_steps > 0 else (6 if args.smoke_test else -1)
@@ -375,10 +399,36 @@ def train_alpha():
     # 15. Cleanly finish experiment tracker
     finish_experiment_tracker()
     
+    # Load and enrich run summary
+    summary_data = {}
+    if os.path.exists(local_summary_path):
+        try:
+            with open(local_summary_path, "r", encoding="utf-8") as f:
+                summary_data = json.load(f)
+        except Exception:
+            pass
+
+    summary_data.update({
+        "run_name": run_name,
+        "lora_r": args.lora_r,
+        "lora_alpha": args.lora_alpha,
+        "lr": args.lr,
+        "target_modules": args.target_modules,
+        "epochs": args.epochs,
+        "batch_size": args.batch_size,
+        "grad_accum": args.grad_accum,
+        "output_dir": args.output_dir,
+        "peak_vram_gb": round(peak_vram_gb, 3),
+        "total_train_duration_sec": round(total_duration, 2),
+    })
+
+    with open(local_summary_path, "w", encoding="utf-8") as f:
+        json.dump(summary_data, f, indent=2, ensure_ascii=False)
+
     print("\n" + "=" * 70)
     print("SUCCESS: Phase 2 Alpha training script executed with all tracking criteria met!")
     print("=" * 70)
-    return 0
+    return summary_data
 
 
 if __name__ == "__main__":

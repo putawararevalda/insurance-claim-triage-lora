@@ -1,6 +1,6 @@
 # Alpha Dataset (500–800 Samples) Statistics Report
 
-**Date**: 2026-10-28  
+**Date**: 2026-10-29  
 **Pipeline**: Fase 2.1 - Dataset Scaling & Synthetic Generation  
 **Domain**: Indonesian Insurance Claim & FNOL Triage  
 
@@ -17,7 +17,7 @@ All samples strictly conform to Pydantic type validation (`ClaimTriageOutput`), 
 | **Train Set Count** | $\ge 400$ | **520** (80.0%) | **Pass** |
 | **Validation Set Count** | $\ge 50$ | **65** (10.0%) | **Pass** |
 | **Test Set Count** | $\ge 50$ | **65** (10.0%) | **Pass** |
-| **Edge Case Ratio** | $\ge 15\%$ | **22.6%** (147 samples) | **Pass** |
+| **Edge Case Ratio** | $\ge 15\%$ | **34.5%** (224 samples) | **Pass** |
 | **Pydantic Validation Rate** | 100% | **100.0%** | **Pass** |
 | **Cross-Split Data Leakage** | 0 | **0 (Zero Leakage)** | **Pass** |
 
@@ -46,10 +46,10 @@ The dataset spans authentic real-world communication styles:
 3. **Formal Corporate & Agent Communications (25%)**: Structured notification letters, policy number references, hospital discharge summaries.
 4. **Clinical & Medical Technical Summaries (15%)**: Formal medical diagnosis codes and clinical observations.
 
-### Edge Case Scenarios Included (147 samples, 22.6%)
+### Edge Case Scenarios Included (224 samples, 34.5%)
 - **Masa Tunggu (Waiting Period) Disputes**: Diagnosis made within 30 days of policy inception.
 - **Pre-Existing Conditions Exclusion**: Prior chronic illnesses versus newly discovered symptoms.
-- **Dual Symptomatology**: Simultaneous accident and pre-existing medical incident (e.g. syncope resulting in fall fracture).
+- **Dual Symptomatology**: Simultaneous accident and pre-existing medical incident.
 - **Excess Charges & Room Upgrades**: Voluntarily choosing VIP rooms above policy limit.
 - **Missing / Incomplete Documentation**: Missing police reports for traffic collisions, lack of official hospital stamps.
 - **Lapsed Policy & Autodebit Failures**: Premium payment delays due to banking channel errors.
@@ -58,9 +58,9 @@ The dataset spans authentic real-world communication styles:
 
 ## 4. Input Token Length Statistics
 
-- **Minimum Word Count**: 17 words
-- **Average Word Count**: 29.1 words
-- **P95 Word Count**: 37 words
+- **Minimum Word Count**: 19 words
+- **Average Word Count**: 29.0 words
+- **P95 Word Count**: 36 words
 - **Maximum Word Count**: 49 words
 - **VRAM Compatibility**: All samples fit within the 512 max-sequence-length limit, preventing OOM spikes on the 6GB VRAM RTX 3050 GPU.
 

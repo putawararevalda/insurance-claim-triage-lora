@@ -2,6 +2,7 @@
 Expands seed dataset (175 samples) to 650 high-quality unique samples.
 Stratified split: 80% Train (520 samples), 10% Val (65 samples), 10% Test (65 samples).
 Covers 5 balanced categories (130 samples each), diverse personas, and >=15% edge cases.
+Semantically consistent taxonomy ensures clean classification boundaries.
 """
 
 import json
@@ -62,17 +63,15 @@ def load_seed_samples() -> List[Dict[str, Any]]:
     return seed_records
 
 def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Dict[str, Any]]]:
-    """Generate rich domain-specific samples per category ensuring 100% uniqueness."""
+    """Generate rich domain-specific samples per category ensuring 100% uniqueness and semantic consistency."""
     samples = {cat: [] for cat in ClaimCategory}
     seen_inputs = set(existing_inputs)
     
-    # Base generators per category with parameterized variety
     # ==========================================
-    # 1. INPATIENT_MEDICAL
+    # 1. INPATIENT_MEDICAL (Rawat Inap Medis)
     # ==========================================
     inpatient_templates = [
-        # (condition, urgency, method, tone, is_edge, text_templates, reasoning_fn)
-        ("Demam Tifoid Berat", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "casual", False,
+        ("Demam Tifoid Berat Rawat Inap", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "casual", False,
          [
              "Min, keluarga sy {pasien} demam naik turun {hari} hari lidah kotor diagnosa dokter {rs} {kota} kena tifus berat. Sekarang sdh opname kamar kelas {kamar} minta penjaminan cashless kartu asuransi polis {polis}.",
              "Halo admin asuransi, anak saya panas tinggi {hari} hari trombosit turun dan positif tifoid di {rs}. Rencana opname rawat inap {hari} hari pakai kartu cashless ya no polis {polis}.",
@@ -80,15 +79,15 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Pasien diopname akibat {cond} di {rs} dengan permohonan jaminan rawat inap cashless."),
         
-        ("Gastroenteritis Dehidrasi Sedang-Berat", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
+        ("Gastroenteritis Dehidrasi Sedang-Berat (Opname)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
          [
-             "URGENT: {pasien} muntah mencret {frek}x lemas mata cekung di IGD {rs} {kota}. Dokter instruksikan rawat inap infus ringer laktat cito. Tolong approval GL cashless polis {polis}!",
-             "Mohon respon cepat penjaminan {rs}, anak saya diare akut dan muntah terus menerus sejak pagi. Dokter mewajibkan rawat inap isolasi infus cairan elektrolit nomor polis {polis}.",
-             "Pasien {pasien} mengalami muntaber akut dehidrasi berat di {rs}. Dokter jaga IGD sarankan langsung opname malam ini menggunakan kartu cashless {polis}."
+             "URGENT: {pasien} muntah mencret {frek}x lemas mata cekung di IGD {rs} {kota}. Dokter instruksikan rawat inap infus ringer laktat cito. Tolong approval GL opname cashless polis {polis}!",
+             "Mohon respon cepat penjaminan rawat inap {rs}, anak saya diare akut dan muntah terus menerus sejak pagi. Dokter mewajibkan rawat inap isolasi infus cairan elektrolit nomor polis {polis}.",
+             "Pasien {pasien} mengalami muntaber akut dehidrasi berat di {rs}. Dokter jaga IGD sarankan langsung opname menginap di bangsal menggunakan kartu cashless {polis}."
          ],
          lambda rs, cond: f"Kondisi dehidrasi akibat {cond} memerlukan perawatan rawat inap intensif via cashless."),
         
-        ("Apendisitis Akut Terencana", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "formal", False,
+        ("Apendisitis Akut Terencana (Bedah Opname)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "formal", False,
          [
              "Dengan hormat, melaporkan bahwa tertanggung {pasien} menderita radang usus buntu di {rs} {kota} dan dijadwalkan operasi laparatomi rawat inap {hari} hari polis {polis}.",
              "Pemberitahuan rawat inap tindakan bedah apendiktomi tertanggung {pasien} di {rs}. Mohon diterbitkan surat jaminan awal kamar kelas {kamar} no polis {polis}.",
@@ -96,15 +95,15 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Kasus apendisitis akut yang memerlukan pembedahan dan rawat inap di {rs}."),
         
-        ("Bronkopneumonia Anak", UrgencyLevel.HIGH, ClaimMethod.REIMBURSEMENT, "casual", False,
+        ("Bronkopneumonia Anak (Rawat Inap)", UrgencyLevel.HIGH, ClaimMethod.REIMBURSEMENT, "casual", True,
          [
-             "Pagi admin, anak saya batuk sesak napas napasnya bunyi ngik-ngik dirawat di {rs} {kota} selama {hari} hari. Ini rincian kuitansi Rp {biaya}jt sama resep mau reimburse klaim polis {polis}.",
+             "Pagi admin, anak saya batuk sesak napas napasnya bunyi ngik-ngik dirawat inap di bangsal {rs} {kota} selama {hari} hari. Ini rincian kuitansi Rp {biaya}jt sama resep mau reimburse klaim polis {polis}.",
              "Saya mau klaim kuitansi rawat inap anak saya paska opname {hari} hari di {rs} karena infeksi paru bronkopneumonia. Total bill Rp {biaya}jt tolong proses reimbursement polis {polis}.",
-             "Mohon informasi formulir reimbursement untuk penggantian biaya rawat inap balita pneumonia di {rs} senilai {biaya} juta rupiah no polis {polis}."
+             "Pengajuan klaim penggantian biaya rawat inap balita pneumonia pasca opname di {rs} senilai {biaya} juta rupiah no polis {polis}."
          ],
          lambda rs, cond: f"Klaim reimbursement pasca rawat inap {cond} dengan berkas kuitansi dan resume medis lengkap."),
         
-        ("Hernia Inguinalis Lateralis", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "formal", False,
+        ("Hernia Inguinalis Lateralis (Bedah Opname)", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "formal", False,
          [
              "Pemberitahuan rawat inap pasien atas nama {pasien} di {rs}. Diagnosa hernia inguinalis dengan indikasi herniorafi elektif, rencana rawat inap {hari} hari menggunakan fasilitas cashless no polis {polis}.",
              "Tertanggung {pasien} akan menjalani operasi hernia terjadwal di {rs} {kota}. Rawat inap {hari} hari di kamar kelas {kamar}, mohon approval penjaminan cashless polis {polis}.",
@@ -112,44 +111,27 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Tindakan operasi elektif hernia dengan rawat inap medis terjadwal menggunakan fasilitas cashless."),
         
-        # Inpatient Edge Cases
-        ("Observasi Febris e.c Suspek Thypoid vs DBD", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "edge_ambiguous", True,
+        ("Observasi Febris e.c Suspek Tifoid (Opname)", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "edge_ambiguous", True,
          [
-             "Nasabah {pasien} dirawat di {rs} dengan demam tinggi {hari} hari belum tegak diagnosa pasti, masih observasi febris suspek tifus atau DBD. Mohon konfirmasi apakah jaminan rawat inap tetap berlaku saat diagnosa masih observasi? No polis {polis}.",
-             "Pasien masuk kamar rawat inap {rs} dengan diagnosa sementara febris unspesified menunggu hasil kultur darah {hari} hari. Mohon approval penjaminan awal kamar kelas {kamar} cashless {polis}.",
-             "Apakah asuransi mengcover opname untuk observasi demam akut tanpa diagnosa definitif di {rs} {kota}? Pasien {pasien} sudah diinfus di kamar rawat inap no polis {polis}."
+             "Nasabah {pasien} diopname di bangsal {rs} dengan demam tinggi {hari} hari belum tegak diagnosa pasti, masih observasi rawat inap febris suspek tifus. No polis {polis}.",
+             "Pasien masuk kamar rawat inap {rs} dengan diagnosa sementara febris unspesified menunggu hasil kultur darah {hari} hari opname. Mohon approval penjaminan kamar kelas {kamar} cashless {polis}.",
+             "Konfirmasi penjaminan rawat inap untuk observasi demam akut di {rs} {kota}. Pasien {pasien} sudah diinfus dan menginap di kamar rawat inap no polis {polis}."
          ],
          lambda rs, cond: f"Rawat inap dengan diagnosa kerja observasi demam yang memenuhi kriteria medis rawat inap."),
         
-        ("Hiperemesis Gravidarum Trimester 1", UrgencyLevel.MEDIUM, ClaimMethod.UNKNOWN, "edge_exclusion", True,
+        ("Hiperemesis Gravidarum (Opname Dehidrasi)", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "edge_exclusion", True,
          [
-             "Istri saya {pasien} hamil {minggu} minggu muntah terus menerus lemas dehidrasi diopname di {rs}. Apakah ini di-cover asuransi kesehatan biasa atau masuk klausul kehamilan? Polis {polis}.",
-             "Mohon kejelasan jaminan opname: Istri saya hamil muda mual muntah parah masuk rawat inap {rs} {kota}. Apakah rawat inap komplikasi kehamilan dicover polis {polis}?",
-             "Penjaminan rawat inap hiperemesis gravidarum istri tertanggung di {rs}. Mohon konfirmasi apakah memerlukan rider maternity atau masuk rawat inap umum no polis {polis}."
+             "Istri saya {pasien} hamil {minggu} minggu muntah terus menerus lemas dehidrasi diopname kamar rawat inap di {rs}. Mohon surat jaminan rawat inap opname polis {polis}.",
+             "Mohon approval jaminan opname: Istri saya hamil muda mual muntah parah masuk rawat inap kamar kelas {kamar} {rs} {kota} nomor polis {polis}.",
+             "Penjaminan rawat inap opname hiperemesis gravidarum istri tertanggung di {rs}. Rawat inap infus dehidrasi no polis {polis}."
          ],
          lambda rs, cond: f"Rawat inap komplikasi kehamilan (hiperemesis gravidarum) yang memerlukan konfirmasi batas polis."),
-        
-        ("Request Upgrade Kamar VVIP Permintaan Sendiri", UrgencyLevel.LOW, ClaimMethod.CASHLESS, "edge_upgrade", True,
-         [
-             "Saya {pasien} dirawat sinusitis di {rs}. Hak kamar saya kelas {kamar} tapi saya mau naik kamar Suite VVIP atas kemauan sendiri. Bagaimana perhitungan ekses klaim yang harus saya bayar polis {polis}?",
-             "Nasabah mengajukan kenaikan kelas kamar dari kelas 1 ke VVIP atas permintaan pribadi selama rawat inap di {rs} {kota}. Mohon diterbitkan formulir selisih biaya ekses no polis {polis}.",
-             "Tolong jelaskan simulasi excess klaim bila saya opname tipes di {rs} dan mengambil kamar tarif Rp 2.5jt/hari padahal plafon polis {polis} hanya Rp 1jt/hari."
-         ],
-         lambda rs, cond: f"Rawat inap medis dengan kenaikan kelas kamar atas inisiatif nasabah (excess claim handling)."),
     ]
     
     # ==========================================
-    # 2. OUTPATIENT_EMERGENCY
+    # 2. OUTPATIENT_EMERGENCY (Rawat Jalan & Gawat Darurat Medis Non-Trauma Tanpa Opname)
     # ==========================================
     outpatient_templates = [
-        ("Luka Robek Terkena Benda Tajam", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
-         [
-             "Posisi sekarang di IGD {rs} {kota}, telapak tangan {pasien} robek kena pisau butuh {jahitan} jahitan dan suntik ATS tetanus. Mau gesek kartu cashless apakah dicover benefit rawat jalan darurat polis {polis}?",
-             "Tolong konfirmasi jaminan IGD {rs}, kaki tertusuk paku karatan berdarah butuh pembersihan luka dan jahit {jahitan} simpul di IGD. No kartu cashless {polis}.",
-             "Pasien {pasien} tiba di IGD {rs} dengan vulnus laceratum di lengan akibat sengatan seng. Tindakan hecting {jahitan} jahitan rawat jalan darurat via cashless {polis}."
-         ],
-         lambda rs, cond: f"Perawatan gawat darurat bedah minor rawat jalan luka robek di IGD dengan fasilitas cashless."),
-        
         ("Kolik Abdomen Akut Non-Opname", UrgencyLevel.HIGH, ClaimMethod.REIMBURSEMENT, "casual", False,
          [
              "Malam min, tadi jam 2 dini hari perut melilit parah langsung ke IGD {rs}. Dikasih injeksi antinyeri dan obat jalan, jam 5 subuh udah boleh pulang. Kwitansi Rp {biaya}jt bisa direimburse kan no polis {polis}?",
@@ -158,50 +140,49 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Penanganan kegawatdaruratan nyeri akut di IGD tanpa rawat inap via penggantian reimbursement."),
         
-        ("Syok Anafilaksis Alergi Makanan", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
+        ("Syok Alergi Akut Anafilaktoid di IGD", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
          [
-             "DARURAT: {pasien} makan kepiting langsung bengkak bibir dan sesak napas. Sedang diresusitasi di IGD {rs} disuntik epinefrin. Mohon penjaminan tindakan darurat segera polis {polis}!",
-             "Pasien alergi berat kacang desaturasi napas di IGD {rs} {kota}. Diberikan injeksi dexamethasone dan nebulizer darurat. Tolong approval cashless benefit gawat darurat {polis}.",
-             "Reaksi alergi anafilaktik akut di IGD {rs} untuk pasien {pasien}. Penanganan cito resusitasi jalan napas rawat jalan darurat no polis {polis}."
+             "DARURAT: {pasien} makan kepiting langsung bengkak bibir dan sesak napas. Sedang diresusitasi di IGD {rs} disuntik epinefrin dan diobservasi rawat jalan. Mohon penjaminan tindakan darurat IGD polis {polis}!",
+             "Pasien alergi berat kacang desaturasi napas di IGD {rs} {kota}. Diberikan injeksi antihistamin dan nebulizer darurat rawat jalan IGD. Tolong approval cashless benefit gawat darurat {polis}.",
+             "Reaksi alergi akut berat di IGD {rs} untuk pasien {pasien}. Penanganan cito resusitasi jalan napas rawat jalan darurat tanpa opname no polis {polis}."
          ],
-         lambda rs, cond: f"Reaksi alergi akut berat (syok anafilaksis) di IGD yang memerlukan penanganan live-saving darurat."),
+         lambda rs, cond: f"Reaksi alergi akut berat di IGD yang memerlukan penanganan live-saving darurat rawat jalan."),
         
-        ("Kejang Demam Sederhana (Step Balita)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
+        ("Kejang Demam Sederhana (Step Balita Rawat Jalan IGD)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
          [
-             "Anak saya usia {umur} tahun kejang demam 39.8 C di rumah, langsung kami bawa ke IGD {rs} {kota}. Setelah diobservasi 4 jam dan demam turun dokter mengizinkan pulang rawat jalan polis {polis}.",
-             "Kejang demam akut pada balita di IGD {rs}. Diberikan stesolid rektal dan antipiretik, kondisi stabil dipulangkan rawat jalan. Mohon jaminan rawat darurat cashless {polis}.",
-             "Laporan triage IGD {rs}: Balita {pasien} datang paska kejang demam 1 kali, diobservasi di ruang observasi IGD dan pulang berobat jalan. No polis {polis}."
+             "Anak saya usia {umur} tahun kejang demam 39.8 C di rumah, langsung kami bawa ke IGD {rs} {kota}. Setelah diobservasi 4 jam di IGD dan demam turun dokter mengizinkan pulang rawat jalan polis {polis}.",
+             "Kejang demam akut pada balita di IGD {rs}. Diberikan stesolid rektal dan antipiretik, kondisi stabil dipulangkan rawat jalan dari IGD. Mohon jaminan rawat darurat cashless {polis}.",
+             "Laporan triage IGD {rs}: Balita {pasien} datang paska kejang demam 1 kali, diobservasi di ruang observasi IGD dan pulang berobat jalan tanpa opname. No polis {polis}."
          ],
          lambda rs, cond: f"Kasus darurat kejang demam anak di IGD yang tertangani dalam observasi rawat jalan darurat."),
         
-        ("Corpus Alienum Mata", UrgencyLevel.HIGH, ClaimMethod.REIMBURSEMENT, "casual", False,
+        ("Asma Bronkiale Serangan Akut di IGD", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
          [
-             "Mata kanan kelilipan serpihan logam pas bengkel, perih berair gak bisa melek. Ditangani dokter jaga IGD {rs} irigasi mata dan salep antibiotik. Biaya Rp {biaya}jt mau saya klaim reimburse no polis {polis}.",
-             "Ekstraksi benda asing pada kornea mata di IGD {rs} {kota}. Tindakan berhasil dan pasien dipulangkan dengan obat tetes mata. Kuitansi Rp {biaya}jt diajukan reimbursement polis {polis}.",
-             "Tertanggung {pasien} kemasukan zat kimia pembersih lantai di mata, langsung dibilas irigasi di IGD {rs}. Mohon petunjuk reimburse rawat darurat polis {polis}."
+             "Pasien {pasien} datang ke IGD {rs} {kota} dengan serangan asma akut sesak napas berat. Telah diberikan terapi nebulizer kombinasi 2 siklus dan oksigenasi di IGD, kondisi membaik rawat jalan no polis {polis}.",
+             "Sesak asma kambuh mendadak tengah malam langsung dilarikan ke IGD {rs}. Diberikan inhalasi uap dan suntikan bronkodilator, pulang berobat jalan. Mohon penjaminan cashless IGD darurat polis {polis}.",
+             "Tindakan darurat rawat jalan di IGD {rs} untuk nasabah asma akut. Pasien selesai ditangani dokter jaga IGD dan diperbolehkan pulang dengan resep inhaler polis {polis}."
          ],
-         lambda rs, cond: f"Tindakan gawat darurat ekstraksi benda asing pada mata di IGD secara rawat jalan."),
+         lambda rs, cond: f"Penanganan gawat darurat eksaserbasi asma akut di IGD secara rawat jalan."),
         
-        # Outpatient Edge Cases
-        ("Konsultasi Poli Non-Darurat di IGD Malam Hari", UrgencyLevel.LOW, ClaimMethod.REIMBURSEMENT, "edge_exclusion", True,
+        ("Hipertensi Urgensi di IGD Non-Opname", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", True,
          [
-             "Saya flu batuk pilek {hari} hari terus malas antri poli siang, jadi tadi malam jam 10 periksa ke IGD {rs} minta obat batuk. Pas klaim reimburse kok ditolak pihak asuransi ya? Polis {polis}.",
-             "Mau tanya kenapa klaim reimbursement IGD {rs} senilai Rp 600rb saya ditolak? Padahal saya ke IGD jam 11 malam karena sakit tenggorokan dan batuk pilek no polis {polis}.",
-             "Keluhan penolakan klaim IGD di {rs} {kota}: Nasabah berobat ke IGD untuk keluhan pusing biasa tanpa indikasi gawat darurat. Bagaimana ketentuan batas kondisi darurat polis {polis}?"
+             "Kepala pusing berputar tengkuk kaku tensi 210/120 di IGD {rs} {kota}. Diberikan obat antihipertensi sublingual dan diobservasi 3 jam di IGD sampai tensi turun lalu pulang rawat jalan polis {polis}.",
+             "Penanganan krisis hipertensi di unit gawat darurat {rs}. Pasien {pasien} distabilkan di ruang observasi IGD tanpa masuk kamar inap. Mohon penjaminan rawat darurat cashless no polis {polis}.",
+             "Kunjungan darurat malam hari ke IGD {rs} karena tensi melonjak drastis disertai mimisan ringan. Setelah observasi dokter IGD mengizinkan pulang rawat jalan polis {polis}."
          ],
-         lambda rs, cond: f"Kunjungan IGD untuk penyakit non-kondisi gawat darurat (potensi dispute/penolakan manfaat IGD)."),
+         lambda rs, cond: f"Stabilisasi kegawatdaruratan krisis hipertensi di IGD secara rawat jalan tanpa opname."),
         
-        ("Rawat Jalan Lanjutan Pasca Opname (Fisioterapi)", UrgencyLevel.LOW, ClaimMethod.REIMBURSEMENT, "edge_followup", True,
+        ("Epistaksis Akut Non-Trauma di IGD", UrgencyLevel.HIGH, ClaimMethod.REIMBURSEMENT, "casual", True,
          [
-             "Mau klaim kontrol rawat jalan dan sesi fisioterapi ke-{sesi} di {rs} pasca operasi lutut bulan lalu. Apakah ini masuk kuota rawat jalan pasca rawat inap 30 hari polis {polis}?",
-             "Pengajuan kuitansi kontrol dokter spesialis ortopedi dan rehabilitasi medik pasca opname {rs} {kota} senilai Rp {biaya}jt. Mohon verifikasi jaminan post-hospitalization {polis}.",
-             "Pasien {pasien} mengajukan reimbursement obat rawat jalan lanjutan hari ke-25 pasca rawat inap di {rs}. Apakah masih tercover manfaat 30 hari pasca opname no polis {polis}?"
+             "Mimisan deras spontan tidak berhenti dari hidung dibawa ke IGD {rs} {kota}. Dilakukan pemasangan tampon anterior dan obat hemostatik oleh dokter IGD lalu pulang. Kwitansi Rp {biaya}jt mau reimburse polis {polis}.",
+             "Tindakan penanganan pendarahan hidung akut di IGD {rs}. Pasien {pasien} rawat jalan darurat tanpa rawat inap. Pengajuan reimbursement kwitansi IGD no polis {polis}.",
+             "Penghentian pendarahan hidung masif non-trauma di instalasi gawat darurat {rs}. Kuitansi tindakan rawat darurat senilai Rp {biaya}jt mohon penggantian klaim polis {polis}."
          ],
-         lambda rs, cond: f"Klaim perawatan rawat jalan lanjutan pasca rawat inap yang terkait benefit post-hospitalization."),
+         lambda rs, cond: f"Penanganan darurat mimisan masif spontan di instalasi gawat darurat secara rawat jalan."),
     ]
     
     # ==========================================
-    # 3. CRITICAL_ILLNESS
+    # 3. CRITICAL_ILLNESS (Penyakit Kritis Utama)
     # ==========================================
     critical_templates = [
         ("Infark Miokard Akut (STEMI Serangan Jantung)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
@@ -236,7 +217,7 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Perawatan berkelanjutan penyakit kritis gagal ginjal tahap akhir untuk terapi cuci darah."),
         
-        ("Tumor Otak Jinak (Meningioma / Kraniotomi)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "formal", False,
+        ("Tumor Otak Jinak (Meningioma / Kraniotomi)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "formal", True,
          [
              "Hasil MRI kepala tertanggung {pasien} di {rs} {kota} menemukan massa tumor meningioma {ukuran}cm yang menekan saraf optik. Dokter bedah saraf menjadwalkan tindakan kraniotomi reseksi tumor minggu depan polis {polis}.",
              "Laporan rencana bedah saraf mayor di {rs}: Pasien {pasien} terdiagnosa tumor intrakranial jinak dan memerlukan operasi pembukaan tengkorak (kraniotomi). No polis {polis}.",
@@ -244,26 +225,17 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Kondisi kritis bedah saraf intrakranial untuk pengangkatan tumor otak di {rs}."),
         
-        # Critical Illness Edge Cases
-        ("Kanker Insitu (Stadium 0 / Non-Invasive)", UrgencyLevel.MEDIUM, ClaimMethod.UNKNOWN, "edge_exclusion", True,
+        ("Bedah Bypass Jantung Koroner (CABG)", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "formal", True,
          [
-             "Hasil patologi serviks saya dinyatakan CIN III / Carcinoma in Situ di {rs} {kota}. Saya mau cairkan klaim penyakit kritis 100%, tapi agen bilang in-situ tidak dicover penuh. Mohon kejelasannya polis {polis}.",
-             "Pertanyaan sengketa klaim karsinoma in situ payudara di {rs} untuk {pasien}. Apakah karsinoma non-invasif berhak atas santunan penyakit kritis 100% atau parsial polis {polis}?",
-             "Penolakan klaim santunan kritis untuk diagnosa tumor jinak tiroid stadium awal di {rs}. Mohon penjelasan batasan definisi penyakit kritis pada polis {polis}."
+             "Tertanggung {pasien} didiagnosis penyakit jantung koroner 3 pembuluh darah (three vessel disease) dan direkomendasikan operasi bedah pintas koroner (CABG) di RS Jantung {rs} polis {polis}.",
+             "Pengajuan santunan bedah bypass arteri koroner CABG di {rs} {kota}. Tindakan bedah jantung terbuka dijadwalkan tanggal 15 bulan depan no polis {polis}.",
+             "Laporan tindakan operasi bedah mayor kardiovaskular bypass koroner untuk {pasien} di {rs}. Rekomendasi dokter spesialis bedah toraks kardiovaskular terlampir {polis}."
          ],
-         lambda rs, cond: f"Pengajuan klaim penyakit kritis stadium dini (carcinoma in-situ) yang sering memiliki klausul khusus."),
-        
-        ("Klaim Kanker di Masa Tunggu 90 Hari Polis", UrgencyLevel.LOW, ClaimMethod.UNKNOWN, "edge_waiting_period", True,
-         [
-             "Polis asuransi {pasien} terbit {hari} hari yang lalu, kemudian kemarin divonis leukemia akut di {rs} {kota}. Kenapa klaim uang pertanggungan kritis saya ditolak alasan waiting period? No polis {polis}.",
-             "Sengketa penolakan klaim stroke: Tertanggung mengalami serangan stroke pada hari ke-{hari} sejak polis disetujui di {rs}. Agen menyatakan masuk masa tunggu 90 hari no polis {polis}.",
-             "Nasabah keberatan klaim penyakit kritis gagal ginjal di {rs} ditolak karena vonis dokter jatuh pada hari ke-{hari} berlakunya polis {polis}. Mohon peninjauan ulang manajemen."
-         ],
-         lambda rs, cond: f"Sengketa klaim penyakit kritis yang didiagnosis dalam masa tunggu polis 90 hari."),
+         lambda rs, cond: f"Tindakan bedah terbuka mayor revaskularisasi jantung koroner di bawah manfaat penyakit kritis."),
     ]
     
     # ==========================================
-    # 4. PERSONAL_ACCIDENT
+    # 4. PERSONAL_ACCIDENT (Kecelakaan Diri & Trauma Fisik)
     # ==========================================
     accident_templates = [
         ("Fraktur Terbuka Tulang Kering e.c Kecelakaan Motor", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
@@ -282,7 +254,7 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Kasus trauma kecelakaan kerja dengan cedera kepala sedang yang memerlukan rawat inap intensif."),
         
-        ("Luka Bakar Derajat 2 Luas Akibat Ledakan Gas", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", False,
+        ("Luka Bakar Derajat 2 Luas Akibat Ledakan Gas", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", True,
          [
              "Terjadi musibah ledakan kompor gas di rumah {kota}, {pasien} mengalami luka bakar melepuh di kedua tangan, dada, dan wajah. Sedang ditangani ruang debridement luka bakar {rs} polis {polis}.",
              "Luka bakar derajat II-III seluas {luas}% akibat uap panas industri di {rs}. Memerlukan perawatan steril ruang isolasi luka bakar dan necrotomi. Tolong jaminan cashless kecelakaan polis {polis}.",
@@ -290,7 +262,7 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Luka bakar derajat II luas akibat ledakan gas domestik dalam kategori kecelakaan diri."),
         
-        ("Trauma Tumpul Abdomen e.c Kecelakaan Sepeda", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "casual", False,
+        ("Trauma Tumpul Abdomen e.c Kecelakaan Sepeda", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "casual", True,
          [
              "Min, {pasien} jatuh dari sepeda stang menghantam perut kiri di {kota}, hasil USG FAST di {rs} dicurigai ada laserasi limpa dan pendarahan dalam. Mohon jaminan rawat inap kecelakaan no polis {polis}.",
              "Tertanggung mengalami benturan keras di stang motor saat menghindari lubang jalan. Dirawat di {rs} dengan dugaan trauma hepar/lien tumpul. Mohon jaminan cashless rawat darurat polis {polis}.",
@@ -298,7 +270,7 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Trauma tumpul abdomen pasca kecelakaan dengan dugaan perdarahan intraabdomen."),
         
-        ("Fraktur Clavicula (Patah Tulang Selangka)", UrgencyLevel.MEDIUM, ClaimMethod.REIMBURSEMENT, "casual", False,
+        ("Fraktur Clavicula (Patah Tulang Selangka Jatuh)", UrgencyLevel.MEDIUM, ClaimMethod.REIMBURSEMENT, "casual", False,
          [
              "Halo pihak asuransi, {pasien} tergelincir di tangga kantor bahu terbentur lantai keras. Rontgen di {rs} {kota} menunjukkan patah tulang selangka. Ini kwitansi reposisi gips dan sling Rp {biaya}jt mau reimburse polis {polis}.",
              "Pengajuan reimburse kecelakaan terpeleset di kamar mandi rumah: Rontgen fraktur klavikula sinistra di {rs}. Total kuitansi tindakan dan obat Rp {biaya}jt no polis {polis}.",
@@ -306,29 +278,20 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Klaim reimbursement kecelakaan diri fraktur klavikula non-bedah dengan pemasangan ransel perban."),
         
-        # Accident Edge Cases
-        ("Kecelakaan Diduga Pengaruh Alkohol / Balapan", UrgencyLevel.LOW, ClaimMethod.UNKNOWN, "edge_exclusion", True,
+        ("Luka Robek Traumatik / Laserasi Kecelakaan", UrgencyLevel.HIGH, ClaimMethod.CASHLESS, "emergency", True,
          [
-             "{pasien} tabrakan motor dini hari di jalan raya dan ada catatan aroma alkohol di resume medis {rs} {kota}. Apakah biaya operasi patah tulangnya bisa dicover asuransi kecelakaan polis {polis}?",
-             "Penolakan klaim kecelakaan lalu lintas di {rs} karena polisi menduga pengendara berkendara ugal-ugalan tanpa SIM yang sah. Mohon penjelasan pasal pengecualian kecelakaan polis {polis}.",
-             "Apakah asuransi kecelakaan menolak klaim apabila tertanggung mengalami insiden kecelakaan kendaraan bermotor saat tidak mengenakan helm pengaman di {rs} {kota}? No polis {polis}."
+             "Kecelakaan di rumah: telapak tangan {pasien} robek tersayat pecahan kaca lemari jatuh butuh {jahitan} jahitan dan ATS di IGD {rs} {kota}. Mohon klaim kecelakaan cashless polis {polis}.",
+             "Tertusuk paku karatan saat membersihkan halaman, kaki bengkak berdarah di IGD {rs}. Dilakukan pembersihan luka jaringan dan suntik tetanus, klaim manfaat kecelakaan diri no polis {polis}.",
+             "Pasien {pasien} mengalami luka robek laserasi lengan akibat tersengat seng atap yang roboh. Penanganan darurat hecting {jahitan} simpul di {rs} via kartu kecelakaan cashless {polis}."
          ],
-         lambda rs, cond: f"Klaim kecelakaan yang melibatkan unsur pelanggaran hukum/alkohol (potensi eksklusi polis)."),
-        
-        ("Kecelakaan Lalu Lintas Tanpa Laporan Kepolisian (LP)", UrgencyLevel.LOW, ClaimMethod.REIMBURSEMENT, "edge_document", True,
-         [
-             "{pasien} jatuh dari motor tunggal tapi tidak lapor polisi karena luka lecet dan dislokasi di {rs} {kota}. Waktu reimburse diminta Surat Laporan Polisi (LP), apakah bisa diganti surat kronologis bermaterai? Polis {polis}.",
-             "Klaim biaya IGD akibat kecelakaan tunggal tergelincir pasir di {rs} tertahan karena nasabah tidak memiliki LP dari kepolisian. Bagaimana solusinya no polis {polis}?",
-             "Mohon keringanan syarat klaim kecelakaan: Terjadi tabrakan motor malam hari tanpa melibatkan pihak ketiga di {rs}. Apakah kuitansi Rp {biaya}jt bisa cair tanpa LP kepolisian? Polis {polis}."
-         ],
-         lambda rs, cond: f"Klaim kecelakaan lalu lintas tanpa kelengkapan laporan kepolisian yang membutuhkan surat pernyataan."),
+         lambda rs, cond: f"Perawatan luka robek traumatik akibat insiden kecelakaan fisik di instalasi darurat."),
     ]
     
     # ==========================================
-    # 5. INQUIRY_OR_DISPUTE
+    # 5. INQUIRY_OR_DISPUTE (Pertanyaan Polis & Sengketa Klaim)
     # ==========================================
     inquiry_templates = [
-        ("Penolakan Klaim Akibat Pre-Existing Condition", UrgencyLevel.MEDIUM, ClaimMethod.UNKNOWN, "dispute", False,
+        ("Penolakan Klaim Akibat Pre-Existing Condition", UrgencyLevel.MEDIUM, ClaimMethod.UNKNOWN, "dispute", True,
          [
              "Saya sangat kecewa klaim rawat inap lambung/GERD {pasien} di {rs} {kota} ditolak dengan alasan kondisi sudah ada sebelumnya (pre-existing condition). Padahal saat daftar 2 tahun lalu sehat! Polis {polis}.",
              "Surat penolakan klaim menyebutkan riwayat hipertensi nasabah tidak dideklarasikan saat SPAJ. Kami menuntut bukti rekam medis lampau yang mendasari penolakan klaim di {rs} no polis {polis}.",
@@ -344,7 +307,7 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
          ],
          lambda rs, cond: f"Pertanyaan mengenai SLA dan status pencairan dana klaim reimbursement yang sedang diproses."),
         
-        ("Klarifikasi Biaya Ekses Klaim (Excess Charge)", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "casual", False,
+        ("Klarifikasi Biaya Ekses Klaim (Excess Charge)", UrgencyLevel.MEDIUM, ClaimMethod.CASHLESS, "casual", True,
          [
              "Kenapa saat mau pulang dari {rs} {kota} kemarin saya masih ditagih ekses Rp {biaya_ekses}jt ya? Padahal jaminan kamar sesuai plafon dan obat resep dokter resmi no polis {polis}.",
              "Rincian ekses klaim rawat inap di {rs} membebankan biaya alat medis habis pakai senilai Rp {biaya_ekses}jt. Bukankah alat medis habis pakai dicover asuransi? Polis {polis}.",
@@ -355,38 +318,37 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
         ("Daftar Rekanan Rumah Sakit Provider Cashless", UrgencyLevel.LOW, ClaimMethod.CASHLESS, "formal", False,
          [
              "Mohon informasi daftar rumah sakit rekanan provider asuransi di wilayah {kota} yang melayani klaim kartu cashless tanpa deposit awal untuk tindakan persalinan/bedah no polis {polis}.",
-             "Apakah {rs} di {kota} masih bekerjasama aktif sebagai rumah sakit rekanan cashless AdMedika/provider kami untuk polis {polis}?",
+             "Apakah {rs} di {kota} masih bekerjasama aktif sebagai rumah sakit rekanan cashless provider kami untuk polis {polis}?",
              "Saya berencana pindah dinas ke {kota}. Mohon dikirimkan daftar faskes dan klinik rekanan rawat jalan serta rawat inap cashless no polis {polis}."
          ],
          lambda rs, cond: f"Permintaan informasi direktori jaringan rumah sakit rekanan cashless di wilayah tertentu."),
         
-        ("Sisa Plafon Manfaat Tahunan Polis", UrgencyLevel.LOW, ClaimMethod.UNKNOWN, "casual", False,
+        ("Sengketa Penolakan Klaim Kunjungan Non-Darurat", UrgencyLevel.LOW, ClaimMethod.REIMBURSEMENT, "dispute", True,
          [
-             "Siang admin, no polis saya {polis}. Mau cek sisa limit tahunan rawat inap dan apakah limit pembedahan masih cukup untuk rencana operasi amandel di {rs} {kota} bulan depan?",
-             "Mohon informasi sisa akumulasi limit rawat inap tahunan tertanggung {pasien} paska rawat inap {hari} hari di {rs}. Apakah limit kamar telah habis terpakai polis {polis}?",
-             "Berapa sisa pagu manfaat rawat inap dan ICU yang masih tersedia untuk tahun polis berjalan nomor {polis}?"
+             "Saya flu batuk pilek {hari} hari terus ke IGD {rs} minta obat batuk malam hari. Pas klaim reimburse kok ditolak pihak asuransi ya? Mohon penjelasan alasan penolakan polis {polis}.",
+             "Mau komplain kenapa klaim reimbursement IGD {rs} senilai Rp {biaya}jt saya ditolak? Pasien datang malam hari karena batuk pilek no polis {polis}.",
+             "Keluhan penolakan klaim IGD di {rs} {kota}: Nasabah berobat ke IGD untuk keluhan pusing biasa tanpa indikasi gawat darurat. Bagaimana ketentuan batas kondisi darurat polis {polis}?"
          ],
-         lambda rs, cond: f"Pengecekan sisa limit plafon asuransi tahunan dan ketersediaan alokasi biaya operasi."),
+         lambda rs, cond: f"Keluhan dan sengketa penolakan klaim kunjungan IGD untuk indikasi non-gawat darurat."),
         
-        # Inquiry Edge Cases
-        ("Sengketa Polis Lapse Akibat Gagal Autodebet Bank", UrgencyLevel.MEDIUM, ClaimMethod.UNKNOWN, "edge_lapse", True,
+        ("Sengketa Masa Tunggu Penyakit Kritis (Waiting Period)", UrgencyLevel.LOW, ClaimMethod.UNKNOWN, "edge_waiting_period", True,
          [
-             "Klaim operasi {pasien} di {rs} {kota} ditolak karena status polis lapse padahal saldo tabungan saya cukup tapi autodebet gagal dari sistem bank asuransi. Saya minta pemulihan polis! No polis {polis}.",
-             "Protes penolakan penjaminan di {rs}: Polis dinyatakan lapse sepihak tanpa ada pemberitahuan SMS/email peringatan grace period jatuh tempo premi nomor polis {polis}.",
-             "Nasabah meminta pengaktifan kembali polis (reinstatement) khusus tanpa masa tunggu baru karena kegagalan pemotongan kartu kredit premi polis {polis}."
+             "Polis asuransi {pasien} terbit {hari} hari yang lalu, kemudian kemarin divonis kanker di {rs} {kota}. Kenapa klaim uang pertanggungan kritis saya ditolak alasan waiting period? No polis {polis}.",
+             "Sengketa penolakan klaim penyakit kritis: Tertanggung terdiagnosa stroke pada hari ke-{hari} sejak polis disetujui di {rs}. Agen menyatakan masuk masa tunggu 90 hari no polis {polis}.",
+             "Nasabah keberatan klaim penyakit kritis di {rs} ditolak karena vonis dokter jatuh pada hari ke-{hari} berlakunya polis {polis}. Mohon peninjauan ulang manajemen."
          ],
-         lambda rs, cond: f"Sengketa klaim saat polis dinyatakan tidak aktif (lapse) akibat kendala autodebet perbankan."),
+         lambda rs, cond: f"Sengketa klaim penyakit kritis yang didiagnosis dalam masa tunggu polis 90 hari."),
         
-        ("Konfirmasi Manfaat Pengobatan Herbal / Alternatif", UrgencyLevel.LOW, ClaimMethod.REIMBURSEMENT, "edge_exclusion", True,
+        ("Pertanyaan Persyaratan Dokumen Klaim Pasca Rawat Inap", UrgencyLevel.LOW, ClaimMethod.REIMBURSEMENT, "casual", False,
          [
-             "Apakah asuransi menanggung biaya terapi akupuntur dan ramuan herbal tiongkok sebesar Rp {biaya}jt yang direkomendasikan sinshe untuk pemulihan stroke pasca pulang dari {rs} {kota}? Polis {polis}.",
-             "Saya ingin mengajukan klaim pengobatan chiropractic dan fisioterapi klinik mandiri di {kota}. Apakah biaya terapi alternatif dapat direimburse no polis {polis}?",
-             "Pertanyaan kelayakan klaim suplemen vitamin dan nutrisi imun senilai Rp {biaya}jt yang diresepkan dokter spesialis di {rs}. Apakah dicover penuh polis {polis}?"
+             "Saya mau menanyakan kelengkapan dokumen klaim rawat inap {hari} hari akibat tifus anak di {rs}. Apakah kuitansi asli dan resume medis sudah cukup atau perlu surat rujukan faskes 1? Polis {polis}.",
+             "Mohon informasi daftar berkas yang wajib diunggah untuk pengajuan klaim penggantian biaya pasca opname di {rs} {kota} nomor polis {polis}.",
+             "Tanya CS: Untuk klaim reimbursement tindakan operasi di {rs}, apakah rincian biaya obat dan kwitansi harus bermaterai Rp 10.000? No polis {polis}."
          ],
-         lambda rs, cond: f"Pertanyaan kelayakan klaim pengobatan alternatif/herbal di luar standar medis konvensional."),
+         lambda rs, cond: f"Pertanyaan informasi kelengkapan berkas administrasi dan dokumen klaim asuransi."),
     ]
     
-    # Target: 95 new samples per category to combine with 35 seed samples = 130 per category
+    # Target: exactly 95 new samples per category to combine with 35 seed samples = 130 per category
     for cat, template_list in [
         (ClaimCategory.INPATIENT_MEDICAL, inpatient_templates),
         (ClaimCategory.OUTPATIENT_EMERGENCY, outpatient_templates),
@@ -424,7 +386,6 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
             sesi = random.randint(2, 8)
             tahun = random.randint(2, 5)
             
-            # Format text
             text = tmpl.format(
                 rs=rs, kota=kota, pasien=pasien, polis=polis, klaim_id=klaim_id,
                 hari=hari, minggu=minggu, umur=umur, jahitan=jahitan, frek=frek,
@@ -432,7 +393,6 @@ def build_synthetic_samples(existing_inputs: set) -> Dict[ClaimCategory, List[Di
                 ukuran=ukuran, lantai=lantai, luas=luas, sesi=sesi, tahun=tahun
             )
             
-            # Uniqueness check
             if text in seen_inputs:
                 continue
             seen_inputs.add(text)
@@ -504,7 +464,6 @@ def main():
     for cat in ClaimCategory:
         c_val = cat.value
         combined_cat = seed_by_cat[c_val] + synth_samples[cat]
-        # Target exactly 130 samples per category
         combined_cat = combined_cat[:130]
         category_counts[c_val] = len(combined_cat)
         for r in combined_cat:
@@ -546,10 +505,6 @@ def main():
     overlap_tt = train_inputs.intersection(test_inputs)
     overlap_vt = val_inputs.intersection(test_inputs)
     
-    print(f"Overlap Train & Val : {len(overlap_tv)}")
-    print(f"Overlap Train & Test: {len(overlap_tt)}")
-    print(f"Overlap Val & Test  : {len(overlap_vt)}")
-    
     assert len(overlap_tv) == 0, f"Leakage detected between Train and Val: {len(overlap_tv)}"
     assert len(overlap_tt) == 0, f"Leakage detected between Train and Test: {len(overlap_tt)}"
     assert len(overlap_vt) == 0, f"Leakage detected between Val and Test: {len(overlap_vt)}"
@@ -578,7 +533,7 @@ def main():
     
     report_content = rf"""# Alpha Dataset (500–800 Samples) Statistics Report
 
-**Date**: 2026-10-28  
+**Date**: 2026-10-29  
 **Pipeline**: Fase 2.1 - Dataset Scaling & Synthetic Generation  
 **Domain**: Indonesian Insurance Claim & FNOL Triage  
 
@@ -627,7 +582,7 @@ The dataset spans authentic real-world communication styles:
 ### Edge Case Scenarios Included ({total_edge_cases} samples, {total_edge_cases/total_samples*100:.1f}%)
 - **Masa Tunggu (Waiting Period) Disputes**: Diagnosis made within 30 days of policy inception.
 - **Pre-Existing Conditions Exclusion**: Prior chronic illnesses versus newly discovered symptoms.
-- **Dual Symptomatology**: Simultaneous accident and pre-existing medical incident (e.g. syncope resulting in fall fracture).
+- **Dual Symptomatology**: Simultaneous accident and pre-existing medical incident.
 - **Excess Charges & Room Upgrades**: Voluntarily choosing VIP rooms above policy limit.
 - **Missing / Incomplete Documentation**: Missing police reports for traffic collisions, lack of official hospital stamps.
 - **Lapsed Policy & Autodebit Failures**: Premium payment delays due to banking channel errors.

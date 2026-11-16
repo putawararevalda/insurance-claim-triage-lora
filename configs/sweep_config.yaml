@@ -1,0 +1,78 @@
+# Hyperparameter Sweep Grid Configuration for Phase 2.3 Alpha
+# Project: Insurance Claim Triage LoRA Fine-Tuning
+# Target Hardware: NVIDIA GeForce RTX 3050 (6GB VRAM)
+
+experiment_name: "alpha_hyperparameter_sweep"
+project: "insurance-claim-triage-lora"
+base_model: "Qwen/Qwen2.5-1.5B-Instruct"
+dataset:
+  train_file: "data/alpha_train.jsonl"
+  val_file: "data/alpha_val.jsonl"
+  train_samples: 520
+  val_samples: 65
+
+sweep_grid:
+  lora_rank_alpha_pairs:
+    - { r: 8, alpha: 16, ratio: 2.0 }
+    - { r: 16, alpha: 32, ratio: 2.0 }
+    - { r: 32, alpha: 64, ratio: 2.0 }
+  learning_rates:
+    - 0.0001
+    - 0.0002
+    - 0.0003
+  target_modules_candidates:
+    attention: ["q_proj", "k_proj", "v_proj", "o_proj"]
+    all_linear: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+runs:
+  - id: "alpha_sweep_r16_a32_lr2e4_attn"
+    name: "Run 1: Baseline Alpha (r=16, a=32, lr=2e-4, Attn)"
+    lora_r: 16
+    lora_alpha: 32
+    lr: 0.0002
+    target_modules: "attention"
+    max_steps: 35
+    eval_steps: 17
+    batch_size: 2
+    grad_accum: 2
+    max_length: 384
+    description: "Standard balanced capacity baseline adapter targeting attention projections."
+
+  - id: "alpha_sweep_r8_a16_lr3e4_attn"
+    name: "Run 2: Low Rank / High LR (r=8, a=16, lr=3e-4, Attn)"
+    lora_r: 8
+    lora_alpha: 16
+    lr: 0.0003
+    target_modules: "attention"
+    max_steps: 35
+    eval_steps: 17
+    batch_size: 2
+    grad_accum: 2
+    max_length: 384
+    description: "Lightweight, parameter-efficient adapter testing faster learning rate convergence."
+
+  - id: "alpha_sweep_r32_a64_lr1e4_attn"
+    name: "Run 3: High Capacity / Conservative LR (r=32, a=64, lr=1e-4, Attn)"
+    lora_r: 32
+    lora_alpha: 64
+    lr: 0.0001
+    target_modules: "attention"
+    max_steps: 35
+    eval_steps: 17
+    batch_size: 2
+    grad_accum: 2
+    max_length: 384
+    description: "High expressive capacity adapter with reduced learning rate to prevent overfitting."
+
+  - id: "alpha_sweep_r16_a32_lr2e4_alllinear"
+    name: "Run 4: All-Linear Projection (r=16, a=32, lr=2e-4, All-Linear)"
+    lora_r: 16
+    lora_alpha: 32
+    lr: 0.0002
+    target_modules: "all-linear"
+    max_steps: 35
+    eval_steps: 17
+    batch_size: 2
+    grad_accum: 2
+    max_length: 384
+    description: "Comprehensive adapter fine-tuning both attention and MLP feedforward layers."

@@ -1,0 +1,47 @@
+# ==============================================================================
+# OLLAMA MODELFILE: Indonesian Insurance Claim & FNOL Triage System
+# Project: Insurance Claim & FNOL Triage LoRA Fine-Tuning Portfolio
+# ==============================================================================
+# Usage with Ollama:
+#   1. Using Qwen 2.5 1.5B Base + System Instruction:
+#      ollama create insurance-triage -f configs/Modelfile
+#      ollama run insurance-triage
+#
+#   2. Or after converting merged Hugging Face model to GGUF via llama.cpp:
+#      python llama.cpp/convert_hf_to_gguf.py models/merged_qwen2.5_1.5b_insurance_triage --outfile models/insurance_triage_f16.gguf
+#      ./llama-quantize models/insurance_triage_f16.gguf models/insurance_triage_q4_k_m.gguf Q4_K_M
+#      (Then change FROM line below to: FROM ./models/insurance_triage_q4_k_m.gguf)
+# ==============================================================================
+
+FROM qwen2.5:1.5b
+
+# Deterministic decoding for reliable structured JSON generation
+PARAMETER temperature 0.1
+PARAMETER top_p 0.9
+PARAMETER top_k 40
+PARAMETER repeat_penalty 1.1
+
+# Stop sequences for ChatML format
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|im_start|>"
+
+# ChatML Template for Qwen2.5
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+{{ .Response }}<|im_end|>
+"""
+
+# Specialized FNOL Triage System Instruction
+SYSTEM """Anda adalah asisten AI spesialis klaim asuransi (First Notice of Loss / FNOL Triage Agent) untuk perusahaan asuransi jiwa dan kesehatan di Indonesia.
+Tugas Anda adalah menganalisis pesan atau laporan klaim nasabah dan mengekstrak informasi ke dalam format JSON yang valid sesuai skema ClaimTriageOutput:
+{
+  "category": "Inpatient_Medical" | "Outpatient_Emergency" | "Critical_Illness" | "Personal_Accident" | "Inquiry_or_Dispute",
+  "urgency": "Low" | "Medium" | "High",
+  "primary_condition": "string",
+  "claim_method": "Cashless" | "Reimbursement" | "Unknown",
+  "reasoning": "string"
+}
+Kembalikan HANYA format JSON valid tanpa penjelasan tambahan di luar blok JSON."""
